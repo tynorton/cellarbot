@@ -1,0 +1,41 @@
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\Total Wine Test.csprojResolveAssemblyReference.cache
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\App.g.i.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\App.g.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\ItemsPage.g.i.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\ItemsPage.g.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\SplitPage.g.i.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\SplitPage.g.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\XamlTypeInfo.g.cs
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\App.xaml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\ItemsPage.xaml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\SplitPage.xaml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\App.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\ItemsPage.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\SplitPage.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\XamlSaveStateFile.xml
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\App.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\ItemsPage.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\SplitPage.xbf
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Total Wine Test.exe
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Total Wine Test.pdb
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\resources.pri
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\AppxManifest.xml
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Total Wine Test.build.appxrecipe
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Newtonsoft.Json.dll
+C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Newtonsoft.Json.xml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\Total Wine Test.exe
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\Total Wine Test.pdb
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\Total Wine Test.csproj.GenerateResource.Cache
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\priconfig.xml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\priconfig.xml.intermediate
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\layout.resfiles
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\layout.resfiles.intermediate
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\resources.resfiles
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\resources.resfiles.intermediate
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\pri.resfiles
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\pri.resfiles.intermediate
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\qualifiers.txt
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\qualifiers.txt.intermediate
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\resources.pri.xml
+C:\GitHub\cellarbot\src\Total Wine Test\obj\Debug\ProjectArchitectures.txt

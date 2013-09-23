@@ -1,0 +1,8 @@
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\bin\Debug\TotalWineParser.exe.config
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\bin\Debug\TotalWineParser.exe
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\bin\Debug\TotalWineParser.pdb
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\bin\Debug\Newtonsoft.Json.dll
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\bin\Debug\Newtonsoft.Json.xml
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\obj\Debug\TotalWineParser.csprojResolveAssemblyReference.cache
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\obj\Debug\TotalWineParser.exe
+C:\GitHub\cellarbot\src\TotalWineParser\TotalWineParser\obj\Debug\TotalWineParser.pdb

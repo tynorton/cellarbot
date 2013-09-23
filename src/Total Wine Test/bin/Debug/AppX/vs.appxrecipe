@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>BREAKER</Machine>
+    <WindowsUser>Ty</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>087b6ae2-3a96-407b-a527-f538fac4b19a</PackageIdentityName>
+    <RegisteredManifestChecksum>635AC4B5EF9A2B01C5AF79487C779292335BE8DD1E8E7418DD5E771506F5CDEE</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>087b6ae2-3a96-407b-a527-f538fac4b19a_1.0.0.0_neutral__mm2he0648c8y2</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>087b6ae2-3a96-407b-a527-f538fac4b19a_mm2he0648c8y2!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>087b6ae2-3a96-407b-a527-f538fac4b19a</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Ty</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-09-23T06:54:19.353</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\Total Wine Test.exe">
+      <PackagePath>Total Wine Test.exe</PackagePath>
+      <Modified>2013-09-23T06:54:19.049</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\TotalWineParser\packages\Newtonsoft.Json.5.0.6\lib\netcore45\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+      <Modified>2013-09-23T06:40:00.803</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\DataModel\SampleData.json">
+      <PackagePath>DataModel\SampleData.json</PackagePath>
+      <Modified>2013-09-23T06:48:30.200</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\LightGray.png">
+      <PackagePath>Assets\LightGray.png</PackagePath>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\MediumGray.png">
+      <PackagePath>Assets\MediumGray.png</PackagePath>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\Assets\DarkGray.png">
+      <PackagePath>Assets\DarkGray.png</PackagePath>
+      <Modified>2013-04-26T05:12:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2013-09-23T06:54:18.873</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\ItemsPage.xbf">
+      <PackagePath>ItemsPage.xbf</PackagePath>
+      <Modified>2013-09-23T06:54:18.874</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\SplitPage.xbf">
+      <PackagePath>SplitPage.xbf</PackagePath>
+      <Modified>2013-09-23T06:54:18.876</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\GitHub\cellarbot\src\Total Wine Test\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2013-09-23T06:54:19.223</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
