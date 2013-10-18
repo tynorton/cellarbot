@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CellarBot.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="beers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brewery_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="cat_id" Type="int" Nullable="false" />
+          <Property Name="style_id" Type="int" Nullable="false" />
+          <Property Name="abv" Type="real" Nullable="false" />
+          <Property Name="ibu" Type="real" Nullable="false" />
+          <Property Name="srm" Type="real" Nullable="false" />
+          <Property Name="upc" Type="int" Nullable="false" />
+          <Property Name="filepath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="descript" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="add_user" Type="int" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="breweries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="website" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="filepath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="descript" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="add_user" Type="int" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="styles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_id" Type="int" Nullable="false" />
+          <Property Name="style_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CellarBotModelStoreContainer">
+          <EntitySet Name="beers" EntityType="Self.beers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="breweries" EntityType="Self.breweries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="styles" EntityType="Self.styles" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CellarBot.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="beer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brewery_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cat_id" Type="Int32" Nullable="false" />
+          <Property Name="style_id" Type="Int32" Nullable="false" />
+          <Property Name="abv" Type="Single" Nullable="false" />
+          <Property Name="ibu" Type="Single" Nullable="false" />
+          <Property Name="srm" Type="Single" Nullable="false" />
+          <Property Name="upc" Type="Int32" Nullable="false" />
+          <Property Name="filepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descript" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="add_user" Type="Int32" Nullable="false" />
+          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="brewery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descript" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="add_user" Type="Int32" Nullable="false" />
+          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="style">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_id" Type="Int32" Nullable="false" />
+          <Property Name="style_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="CellarBotEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="beers" EntityType="Self.beer" />
+          <EntitySet Name="breweries" EntityType="Self.brewery" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="styles" EntityType="Self.style" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CellarBotModelStoreContainer" CdmEntityContainer="CellarBotEntities">
+          <EntitySetMapping Name="beers">
+            <EntityTypeMapping TypeName="CellarBot.Model.beer">
+              <MappingFragment StoreEntitySet="beers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="brewery_id" ColumnName="brewery_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="style_id" ColumnName="style_id" />
+                <ScalarProperty Name="abv" ColumnName="abv" />
+                <ScalarProperty Name="ibu" ColumnName="ibu" />
+                <ScalarProperty Name="srm" ColumnName="srm" />
+                <ScalarProperty Name="upc" ColumnName="upc" />
+                <ScalarProperty Name="filepath" ColumnName="filepath" />
+                <ScalarProperty Name="descript" ColumnName="descript" />
+                <ScalarProperty Name="add_user" ColumnName="add_user" />
+                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="breweries">
+            <EntityTypeMapping TypeName="CellarBot.Model.brewery">
+              <MappingFragment StoreEntitySet="breweries">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="filepath" ColumnName="filepath" />
+                <ScalarProperty Name="descript" ColumnName="descript" />
+                <ScalarProperty Name="add_user" ColumnName="add_user" />
+                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="CellarBot.Model.category">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="styles">
+            <EntityTypeMapping TypeName="CellarBot.Model.style">
+              <MappingFragment StoreEntitySet="styles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="style_name" ColumnName="style_name" />
+                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
