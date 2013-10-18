@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using TotalWineParser.DataModel.TotalWine;
+using TotalWineParser.Model.Bevmo;
 using Windows.Data.Json;
 using Windows.Storage;
 using Windows.UI.Xaml.Media;
@@ -120,7 +124,10 @@ namespace Total_Wine_Test.Data
 
         private async Task GetSampleDataAsync()
         {
-            HttpClient client = new HttpClient();
+            Uri uri = new Uri("http://www.microsoft.com");
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.CookieContainer = new CookieContainer();
+            System.Net.Http.HttpClient client = new System.Net.Http.HttpClient(handler);
 
             var result = await client.GetStringAsync(new Uri("https://m.totalwine.com/json/product/list?id=%2Feng%2Fcategories%2Fbeer"));
 
@@ -144,6 +151,32 @@ namespace Total_Wine_Test.Data
             }
 
             this.Groups.Add(group);
+
+            // throws "The server committed a protocol violation. Section=ResponseHeader Detail=CR must be followed by LF"
+            // cannot bypass using HttpClient, need 3rd party library
+            /*var loginRes = await client.GetStringAsync(new Uri("http://m.bevmo.com/Misc/FulfillmentSelectDropDown.aspx?fullfilmentMethod=1&fullfilmentLocation=171&_=" + GetEpocTime() + "000"));
+
+            var beers = new List<Beer>();
+            var resultHtml = await client.GetStringAsync(new Uri("http://m.bevmo.com/Shop/ProductList.aspx/Beer/Craft-Brew/_/N-15Z1z13tvr?DNID=Beer"));
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(resultHtml); // or Load
+            var desc = doc.DocumentNode.Descendants();
+            var nodes = desc.Where(node => node.Attributes["class"].Value.Contains("ProductListItemTable"));
+            foreach (var node in nodes)
+            {
+                var productName = node.Descendants().Where(n => n.Attributes["id"].Value.Contains("uxProductLink")).FirstOrDefault().InnerText;
+                var imgUri = node.Descendants().Where(n => n.Attributes["id"].Value.Contains("uxProductIconImage")).FirstOrDefault().Attributes["data-src"].Value.Replace("../../../../..", "http://m.bevmo.com");
+
+                beers.Add(new Beer { Name = productName, ThumbUri = new Uri(imgUri) });
+            }*/
+        }
+
+        private static string GetEpocTime()
+        {
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+            TimeSpan span = (DateTime.UtcNow.ToLocalTime() - epoch);
+            return span.TotalSeconds.ToString().Split('.')[0];
         }
     }
 }

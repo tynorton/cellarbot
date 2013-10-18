@@ -1,4 +1,8 @@
 https://m.totalwine.com/json/product/search?id=stone&Range.High=100&Range.Low=0&page=1&pageSize=12&preferredLocation%5BShoppingMethod%5D=PICKUP&preferredLocation%5BState%5D=WA&preferredLocation%5BStoreId%5D=17813
 https://m.totalwine.com/json/product/list?id=%2Feng%2Fcategories%2Fbeer%2Fspecial-release&Range.High=100&Range.Low=0&page=1&pageSize=12&preferredLocation%5BShoppingMethod%5D=PICKUP&preferredLocation%5BState%5D=WA&preferredLocation%5BStoreId%5D=17813
 
-http://m.bevmo.com/Shop/ProductList.aspx/_/D-stone/N-/Ntt-stone?DNID=Home&Dx=mode%2Bmatchany&fromsearch=true&Ns=SalesPrice%7C0&Ntk=All&Ntx=mode%2Bmatchany&utm_referrer=http%3A%2F%2Fwww.bevmo.com%2F
+https://m.totalwine.com/json/product/list?id=%2Feng%2Fcategories%2Fbeer
+https://m.totalwine.com/json/product/list?id=%2Feng%2Fcategories%2Fbeer%2Fcraft-brew
+
+
+http://m.bevmo.com/Shop/ProductList.aspx/Beer/Craft-Brew/_/N-15Z1z13tvr?DNID=Beer
