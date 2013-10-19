@@ -12,7 +12,7 @@ namespace CellarBotHome.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class style
+    public partial class Style
     {
         public int id { get; set; }
         public int cat_id { get; set; }

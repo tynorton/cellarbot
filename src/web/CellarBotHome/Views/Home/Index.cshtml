@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 
     var ents = new CellarBotHome.Models.CellarBotEntities();
-    var beerCount = ents.beers.Count();
+    var beerCount = ents.Beers.Count();
 }
 
 <div class="jumbotron">
@@ -29,5 +29,6 @@
     <div class="col-md-4">
         <h2>Total Beers</h2>
         <p>@beerCount</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Beer", null)">Beer List &raquo;</a></p>
     </div>
 </div>

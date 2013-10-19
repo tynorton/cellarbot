@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="11cef0bda37d483eb4a4e19acfac5f31" Name="Diagram1">
-        <EntityTypeShape EntityType="CellarBot.Model.beer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CellarBot.Model.brewery" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CellarBot.Model.category" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CellarBot.Model.style" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CellarBot.Model.Beer" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CellarBot.Model.Brewery" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="CellarBot.Model.Category" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="CellarBot.Model.Style" Width="1.5" PointX="6.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

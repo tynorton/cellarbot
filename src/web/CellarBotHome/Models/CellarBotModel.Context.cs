@@ -25,9 +25,9 @@ namespace CellarBotHome.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<beer> beers { get; set; }
-        public virtual DbSet<brewery> breweries { get; set; }
-        public virtual DbSet<category> categories { get; set; }
-        public virtual DbSet<style> styles { get; set; }
+        public virtual DbSet<Beer> Beers { get; set; }
+        public virtual DbSet<Brewery> Breweries { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Style> Styles { get; set; }
     }
 }

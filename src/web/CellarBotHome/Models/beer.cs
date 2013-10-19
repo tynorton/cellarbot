@@ -12,7 +12,7 @@ namespace CellarBotHome.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class beer
+    public partial class Beer
     {
         public int id { get; set; }
         public int brewery_id { get; set; }
@@ -24,7 +24,7 @@ namespace CellarBotHome.Models
         public float srm { get; set; }
         public int upc { get; set; }
         public string filepath { get; set; }
-        public string descript { get; set; }
+        public string description { get; set; }
         public int add_user { get; set; }
         public System.DateTime last_mod { get; set; }
     }
