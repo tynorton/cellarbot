@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CellarBotHome.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="CellarBotHome">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=cellarbot;AccountKey=rHf55IpByAQ/7jqOsJ2S9w6nBPG1GTA6NbbxOyDjOViEr7h8fBFcTvdoDazCQM2YruX+DYena0LZgVF8451Q7Q==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
