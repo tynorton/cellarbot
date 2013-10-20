@@ -23,9 +23,13 @@ namespace CellarBotHome.Models
         public float ibu { get; set; }
         public float srm { get; set; }
         public int upc { get; set; }
-        public string filepath { get; set; }
+        public string imagepath { get; set; }
         public string description { get; set; }
         public int add_user { get; set; }
         public System.DateTime last_mod { get; set; }
+    
+        public virtual Brewery Brewery { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Style Style { get; set; }
     }
 }

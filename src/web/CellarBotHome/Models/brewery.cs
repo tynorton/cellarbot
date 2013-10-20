@@ -14,6 +14,11 @@ namespace CellarBotHome.Models
     
     public partial class Brewery
     {
+        public Brewery()
+        {
+            this.Beers = new HashSet<Beer>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string address1 { get; set; }
@@ -24,9 +29,11 @@ namespace CellarBotHome.Models
         public string country { get; set; }
         public string phone { get; set; }
         public string website { get; set; }
-        public string filepath { get; set; }
+        public string imagepath { get; set; }
         public string description { get; set; }
         public int add_user { get; set; }
         public System.DateTime last_mod { get; set; }
+    
+        public virtual ICollection<Beer> Beers { get; set; }
     }
 }

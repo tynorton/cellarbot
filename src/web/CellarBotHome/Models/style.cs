@@ -14,9 +14,17 @@ namespace CellarBotHome.Models
     
     public partial class Style
     {
+        public Style()
+        {
+            this.Beers = new HashSet<Beer>();
+        }
+    
         public int id { get; set; }
         public int cat_id { get; set; }
         public string style_name { get; set; }
         public System.DateTime last_mod { get; set; }
+    
+        public virtual ICollection<Beer> Beers { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

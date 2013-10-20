@@ -4,66 +4,134 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="CellarBot.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure">
+    <Schema Namespace="CellarBot.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Beers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="brewery_id" Nullable="false" Type="int" />
-          <Property Name="name" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="cat_id" Nullable="false" Type="int" />
-          <Property Name="style_id" Nullable="false" Type="int" />
-          <Property Name="abv" Nullable="false" Type="real" />
-          <Property Name="ibu" Nullable="false" Type="real" />
-          <Property Name="srm" Nullable="false" Type="real" />
-          <Property Name="upc" Nullable="false" Type="int" />
-          <Property Name="filepath" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="description" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="add_user" Nullable="false" Type="int" />
-          <Property Name="last_mod" Nullable="false" Precision="0" Type="datetime2" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brewery_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="cat_id" Type="int" Nullable="false" />
+          <Property Name="style_id" Type="int" Nullable="false" />
+          <Property Name="abv" Type="real" Nullable="false" />
+          <Property Name="ibu" Type="real" Nullable="false" />
+          <Property Name="srm" Type="real" Nullable="false" />
+          <Property Name="upc" Type="int" Nullable="false" />
+          <Property Name="imagepath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="add_user" Type="int" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Breweries">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="name" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="address1" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="address2" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="city" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="state" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="code" Nullable="false" MaxLength="25" Type="nvarchar" />
-          <Property Name="country" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="phone" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="website" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="filepath" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="description" Nullable="false" Type="nvarchar(max)" />
-          <Property Name="add_user" Nullable="false" Type="int" />
-          <Property Name="last_mod" Nullable="false" Precision="0" Type="datetime2" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="website" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="imagepath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="add_user" Type="int" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="cat_name" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="last_mod" Nullable="false" Precision="0" Type="datetime2" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Styles">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="cat_id" Nullable="false" Type="int" />
-          <Property Name="style_name" Nullable="false" MaxLength="255" Type="nvarchar" />
-          <Property Name="last_mod" Nullable="false" Precision="0" Type="datetime2" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_id" Type="int" Nullable="false" />
+          <Property Name="style_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Beers_0">
+          <End Role="Breweries" Type="Self.Breweries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Beers" Type="Self.Beers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breweries">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beers">
+              <PropertyRef Name="brewery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beers_Category">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Beers" Type="Self.Beers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beers">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beers_Styles">
+          <End Role="Styles" Type="Self.Styles" Multiplicity="1" />
+          <End Role="Beers" Type="Self.Beers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Styles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beers">
+              <PropertyRef Name="style_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Styles_Category">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Styles" Type="Self.Styles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Styles">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CellarBotModelStoreContainer">
           <EntitySet Name="Beers" EntityType="Self.Beers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Breweries" EntityType="Self.Breweries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Styles" EntityType="Self.Styles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Beers_0" Association="Self.FK_Beers_0">
+            <End Role="Breweries" EntitySet="Breweries" />
+            <End Role="Beers" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beers_Category" Association="Self.FK_Beers_Category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Beers" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beers_Styles" Association="Self.FK_Beers_Styles">
+            <End Role="Styles" EntitySet="Styles" />
+            <End Role="Beers" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Styles_Category" Association="Self.FK_Styles_Category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Styles" EntitySet="Styles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -74,6 +142,22 @@
           <EntitySet Name="Breweries" EntityType="CellarBot.Model.Brewery" />
           <EntitySet Name="Categories" EntityType="CellarBot.Model.Category" />
           <EntitySet Name="Styles" EntityType="CellarBot.Model.Style" />
+          <AssociationSet Name="FK_Beers_0" Association="CellarBot.Model.FK_Beers_0">
+            <End Role="Brewery" EntitySet="Breweries" />
+            <End Role="Beer" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beers_Category" Association="CellarBot.Model.FK_Beers_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Beer" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beers_Styles" Association="CellarBot.Model.FK_Beers_Styles">
+            <End Role="Style" EntitySet="Styles" />
+            <End Role="Beer" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Styles_Category" Association="CellarBot.Model.FK_Styles_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Style" EntitySet="Styles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beer">
           <Key>
@@ -88,10 +172,13 @@
           <Property Name="ibu" Type="Single" Nullable="false" />
           <Property Name="srm" Type="Single" Nullable="false" />
           <Property Name="upc" Type="Int32" Nullable="false" />
-          <Property Name="filepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="imagepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="add_user" Type="Int32" Nullable="false" />
           <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Brewery" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Beer" ToRole="Brewery" />
+          <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Beer" ToRole="Category" />
+          <NavigationProperty Name="Style" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Beer" ToRole="Style" />
         </EntityType>
         <EntityType Name="Brewery">
           <Key>
@@ -107,10 +194,11 @@
           <Property Name="country" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="website" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="filepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="imagepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="add_user" Type="Int32" Nullable="false" />
           <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Brewery" ToRole="Beer" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -119,6 +207,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Category" ToRole="Beer" />
+          <NavigationProperty Name="Styles" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Category" ToRole="Style" />
         </EntityType>
         <EntityType Name="Style">
           <Key>
@@ -128,7 +218,61 @@
           <Property Name="cat_id" Type="Int32" Nullable="false" />
           <Property Name="style_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Style" ToRole="Beer" />
+          <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Style" ToRole="Category" />
         </EntityType>
+        <Association Name="FK_Beers_0">
+          <End Type="CellarBot.Model.Brewery" Role="Brewery" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CellarBot.Model.Beer" Role="Beer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brewery">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beer">
+              <PropertyRef Name="brewery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beers_Category">
+          <End Type="CellarBot.Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="CellarBot.Model.Beer" Role="Beer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beer">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beers_Styles">
+          <End Type="CellarBot.Model.Style" Role="Style" Multiplicity="1" />
+          <End Type="CellarBot.Model.Beer" Role="Beer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Style">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beer">
+              <PropertyRef Name="style_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Styles_Category">
+          <End Type="CellarBot.Model.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CellarBot.Model.Style" Role="Style" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Style">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -138,10 +282,10 @@
           <EntitySetMapping Name="Beers">
             <EntityTypeMapping TypeName="CellarBot.Model.Beer">
               <MappingFragment StoreEntitySet="Beers">
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
                 <ScalarProperty Name="last_mod" ColumnName="last_mod" />
                 <ScalarProperty Name="add_user" ColumnName="add_user" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="filepath" ColumnName="filepath" />
                 <ScalarProperty Name="upc" ColumnName="upc" />
                 <ScalarProperty Name="srm" ColumnName="srm" />
                 <ScalarProperty Name="ibu" ColumnName="ibu" />
@@ -157,10 +301,10 @@
           <EntitySetMapping Name="Breweries">
             <EntityTypeMapping TypeName="CellarBot.Model.Brewery">
               <MappingFragment StoreEntitySet="Breweries">
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
                 <ScalarProperty Name="last_mod" ColumnName="last_mod" />
                 <ScalarProperty Name="add_user" ColumnName="add_user" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="filepath" ColumnName="filepath" />
                 <ScalarProperty Name="website" ColumnName="website" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -193,7 +337,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
