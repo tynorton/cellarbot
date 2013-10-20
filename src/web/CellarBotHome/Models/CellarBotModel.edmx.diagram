@@ -13,7 +13,7 @@
         <AssociationConnector Association="CellarBot.Model.FK_Beers_Category" />
         <AssociationConnector Association="CellarBot.Model.FK_Beers_Styles" />
         <AssociationConnector Association="CellarBot.Model.FK_Styles_Category" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

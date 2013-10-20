@@ -5,66 +5,77 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using CellarBotHome.Models;
+using System.Data.Entity.Validation;
 
 namespace CellarBotHome.Controllers
 {
-    public class BeerController : Controller
+    public class BreweryController : Controller
     {
         //
-        // GET: /Beer/
+        // GET: /Brewery/
         public ActionResult Index(int? page)
         {
             var ents = new CellarBotHome.Models.CellarBotEntities();
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfBeers = ents.Beers.OrderBy(obj => obj.name).ToPagedList(pageNumber, 25); // will only contain 25 items max because of the pageSize
+            var onePageOfBreweries = ents.Breweries.OrderBy(obj => obj.name).ToPagedList(pageNumber, 25); // will only contain 25 items max because of the pageSize
 
-            ViewBag.OnePageOfBeers = onePageOfBeers;
+            ViewBag.OnePageOfBreweries = onePageOfBreweries;
             return View();
         }
 
         //
-        // GET: /Beer/Details/5
+        // GET: /Brewery/Details/5
         public ActionResult Details(int id)
         {
             CellarBotEntities ents = new CellarBotEntities();
-            return View((from b in ents.Beers where b.id == id select b).FirstOrDefault());
+            return View((from b in ents.Breweries where b.id == id select b).FirstOrDefault());
         }
 
         //
-        // GET: /Beer/Create
+        // GET: /Brewery/Create
         public ActionResult Create()
         {
             return View();
         }
 
         //
-        // POST: /Beer/Create
+        // POST: /Brewery/Create
         [HttpPost]
-        public ActionResult Create(Beer beer)
+        public ActionResult Create(Brewery brewery)
         {
             try
             {
                 CellarBotEntities ents = new CellarBotEntities();
-                ents.Beers.Add(beer);
+                ents.Breweries.Add(brewery);
                 ents.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (DbEntityValidationException e)
             {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
                 return View();
             }
         }
 
         //
-        // GET: /Beer/Edit/5
+        // GET: /Brewery/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         //
-        // POST: /Beer/Edit/5
+        // POST: /Brewery/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -81,14 +92,14 @@ namespace CellarBotHome.Controllers
         }
 
         //
-        // GET: /Beer/Delete/5
+        // GET: /Brewery/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         //
-        // POST: /Beer/Delete/5
+        // POST: /Brewery/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

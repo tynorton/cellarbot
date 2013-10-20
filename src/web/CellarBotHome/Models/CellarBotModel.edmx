@@ -14,14 +14,14 @@
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="cat_id" Type="int" Nullable="false" />
           <Property Name="style_id" Type="int" Nullable="false" />
-          <Property Name="abv" Type="real" Nullable="false" />
-          <Property Name="ibu" Type="real" Nullable="false" />
-          <Property Name="srm" Type="real" Nullable="false" />
-          <Property Name="upc" Type="int" Nullable="false" />
-          <Property Name="imagepath" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="abv" Type="real" />
+          <Property Name="ibu" Type="real" />
+          <Property Name="srm" Type="real" />
+          <Property Name="upc" Type="int" />
+          <Property Name="imagepath" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="add_user" Type="int" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Breweries">
           <Key>
@@ -29,18 +29,18 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="address1" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="address2" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="state" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="code" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="website" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="imagepath" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" />
+          <Property Name="state" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="25" />
+          <Property Name="country" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="website" Type="nvarchar" MaxLength="255" />
+          <Property Name="imagepath" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="add_user" Type="int" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -48,7 +48,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cat_name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Styles">
           <Key>
@@ -57,7 +57,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cat_id" Type="int" Nullable="false" />
           <Property Name="style_name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="last_mod" Type="datetime2" Precision="0" />
         </EntityType>
         <Association Name="FK_Beers_0">
           <End Role="Breweries" Type="Self.Breweries" Multiplicity="1">
@@ -168,14 +168,14 @@
           <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cat_id" Type="Int32" Nullable="false" />
           <Property Name="style_id" Type="Int32" Nullable="false" />
-          <Property Name="abv" Type="Single" Nullable="false" />
-          <Property Name="ibu" Type="Single" Nullable="false" />
-          <Property Name="srm" Type="Single" Nullable="false" />
-          <Property Name="upc" Type="Int32" Nullable="false" />
-          <Property Name="imagepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="abv" Type="Single" />
+          <Property Name="ibu" Type="Single" />
+          <Property Name="srm" Type="Single" />
+          <Property Name="upc" Type="Int32" />
+          <Property Name="imagepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="add_user" Type="Int32" Nullable="false" />
-          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Brewery" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Beer" ToRole="Brewery" />
           <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Beer" ToRole="Category" />
           <NavigationProperty Name="Style" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Beer" ToRole="Style" />
@@ -186,18 +186,18 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="address1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="address2" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="website" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="imagepath" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="imagepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="add_user" Type="Int32" Nullable="false" />
-          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Brewery" ToRole="Beer" />
         </EntityType>
         <EntityType Name="Category">
@@ -206,7 +206,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Category" ToRole="Beer" />
           <NavigationProperty Name="Styles" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Category" ToRole="Style" />
         </EntityType>
@@ -217,7 +217,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_id" Type="Int32" Nullable="false" />
           <Property Name="style_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_mod" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Style" ToRole="Beer" />
           <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Style" ToRole="Category" />
         </EntityType>

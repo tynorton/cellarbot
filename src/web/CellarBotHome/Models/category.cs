@@ -22,7 +22,7 @@ namespace CellarBotHome.Models
     
         public int id { get; set; }
         public string cat_name { get; set; }
-        public System.DateTime last_mod { get; set; }
+        public Nullable<System.DateTime> last_mod { get; set; }
     
         public virtual ICollection<Beer> Beers { get; set; }
         public virtual ICollection<Style> Styles { get; set; }

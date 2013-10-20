@@ -32,7 +32,7 @@ namespace CellarBotHome.Models
         public string imagepath { get; set; }
         public string description { get; set; }
         public int add_user { get; set; }
-        public System.DateTime last_mod { get; set; }
+        public Nullable<System.DateTime> last_mod { get; set; }
     
         public virtual ICollection<Beer> Beers { get; set; }
     }

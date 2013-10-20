@@ -6,16 +6,16 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>List of Beers</h2>
+<h2>List of Breweries</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
 <ul>
-    @foreach (var beer in ViewBag.OnePageOfBeers)
+    @foreach (var brewery in ViewBag.OnePageOfBreweries)
     {
-        <li>@Html.ActionLink((string)beer.name, "Details", new { id = beer.id })</li>
+        <li>@Html.ActionLink((string)brewery.name, "Details", new { id = brewery.id })</li>
     }
 </ul>
 <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-@Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfBeers, page => Url.Action("Index", new { page }))
+@Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfBreweries, page => Url.Action("Index", new { page }))
