@@ -86,8 +86,6 @@
             },
             select: function (event, ui) {
                 var selected = ui.item;
-                console.log(selected);
-                alert(selected.cat_id);
                 document.querySelector("#cat_id").value = selected.catId;
                 document.querySelector("#style_id").value = selected.id;
             }
