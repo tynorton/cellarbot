@@ -111,6 +111,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_searchStyles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchValue" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="CellarBotModelStoreContainer">
           <EntitySet Name="Beers" EntityType="Self.Beers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Breweries" EntityType="Self.Breweries" Schema="dbo" store:Type="Tables" />
@@ -158,6 +161,9 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Style" EntitySet="Styles" />
           </AssociationSet>
+          <FunctionImport Name="sp_searchStyles" ReturnType="Collection(CellarBot.Model.sp_searchStyles_Result)">
+            <Parameter Name="SearchValue" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Beer">
           <Key>
@@ -273,6 +279,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_searchStyles_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="cat_id" Nullable="false" />
+          <Property Type="String" Name="style_name" Nullable="false" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -337,6 +348,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchStyles" FunctionName="CellarBot.Model.Store.sp_searchStyles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchStyles_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="style_name" ColumnName="style_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

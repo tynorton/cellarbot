@@ -40,3 +40,31 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* autocomplete input text field */
+.lookup {
+    width: 200px;
+    height: 32px;
+    padding: 4px 8px;
+    margin: 0;
+    border: 3px solid #e2e2e2;
+    background: #e2e2e2;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size: 0.85em;
+    color: #333
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+/* autocomplete drop down override */
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size: 0.85em;
+}
+
+/* autocomplete focus and hover state color override */
+.ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { color: #000; background: #e8e8e8; }

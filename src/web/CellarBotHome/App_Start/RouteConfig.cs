@@ -14,10 +14,18 @@ namespace CellarBotHome
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "SearchStyles",
+                "search/styles/{term}",
+                new { controller = "Styles", action = "Search", term = "" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }
