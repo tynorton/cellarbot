@@ -31,8 +31,8 @@ namespace CellarBotHome.Models
         public string website { get; set; }
         public string imagepath { get; set; }
         public string description { get; set; }
-        public int add_user { get; set; }
-        public Nullable<System.DateTime> last_mod { get; set; }
+        public Nullable<System.DateTime> last_modified { get; set; }
+        public string user_id { get; set; }
     
         public virtual ICollection<Beer> Beers { get; set; }
     }

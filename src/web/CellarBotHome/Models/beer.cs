@@ -20,13 +20,11 @@ namespace CellarBotHome.Models
         public int cat_id { get; set; }
         public int style_id { get; set; }
         public Nullable<float> abv { get; set; }
-        public Nullable<float> ibu { get; set; }
-        public Nullable<float> srm { get; set; }
-        public Nullable<int> upc { get; set; }
         public string imagepath { get; set; }
         public string description { get; set; }
-        public int add_user { get; set; }
-        public Nullable<System.DateTime> last_mod { get; set; }
+        public Nullable<long> upc { get; set; }
+        public Nullable<System.DateTime> last_modified { get; set; }
+        public string user_id { get; set; }
     
         public virtual Brewery Brewery { get; set; }
         public virtual Category Category { get; set; }

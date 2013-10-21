@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using CellarBotHome.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CellarBotHome.Controllers
 {
@@ -34,6 +35,11 @@ namespace CellarBotHome.Controllers
         // GET: /Beer/Create
         public ActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
@@ -42,17 +48,26 @@ namespace CellarBotHome.Controllers
         [HttpPost]
         public ActionResult Create(Beer beer)
         {
-            try
+            if (User.Identity.IsAuthenticated)
             {
-                CellarBotEntities ents = new CellarBotEntities();
-                ents.Beers.Add(beer);
-                ents.SaveChanges();
+                try
+                {
+                    beer.last_modified = DateTime.UtcNow;
+                    beer.user_id = User.Identity.GetUserId();
+                    CellarBotEntities ents = new CellarBotEntities();
+                    ents.Beers.Add(beer);
+                    ents.SaveChanges();
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View();
+                }
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

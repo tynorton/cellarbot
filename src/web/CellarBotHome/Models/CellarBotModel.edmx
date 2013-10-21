@@ -15,13 +15,11 @@
           <Property Name="cat_id" Type="int" Nullable="false" />
           <Property Name="style_id" Type="int" Nullable="false" />
           <Property Name="abv" Type="real" />
-          <Property Name="ibu" Type="real" />
-          <Property Name="srm" Type="real" />
-          <Property Name="upc" Type="int" />
           <Property Name="imagepath" Type="nvarchar" MaxLength="255" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="add_user" Type="int" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" />
+          <Property Name="last_modified" Type="datetime2" Precision="0" />
+          <Property Name="upc" Type="bigint" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Breweries">
           <Key>
@@ -39,8 +37,8 @@
           <Property Name="website" Type="nvarchar" MaxLength="255" />
           <Property Name="imagepath" Type="nvarchar" MaxLength="255" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="add_user" Type="int" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" />
+          <Property Name="last_modified" Type="datetime2" Precision="0" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -48,7 +46,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cat_name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" />
+          <Property Name="last_modified" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Styles">
           <Key>
@@ -57,7 +55,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cat_id" Type="int" Nullable="false" />
           <Property Name="style_name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="last_mod" Type="datetime2" Precision="0" />
+          <Property Name="last_modified" Type="datetime2" Precision="0" />
         </EntityType>
         <Association Name="FK_Beers_0">
           <End Role="Breweries" Type="Self.Breweries" Multiplicity="1">
@@ -141,6 +139,9 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CellarBot.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CellarBotEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_searchStyles" ReturnType="Collection(CellarBot.Model.sp_searchStyles_Result)">
+          <Parameter Name="SearchValue" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Beers" EntityType="CellarBot.Model.Beer" />
           <EntitySet Name="Breweries" EntityType="CellarBot.Model.Brewery" />
           <EntitySet Name="Categories" EntityType="CellarBot.Model.Category" />
@@ -161,10 +162,12 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Style" EntitySet="Styles" />
           </AssociationSet>
-          <FunctionImport Name="sp_searchStyles" ReturnType="Collection(CellarBot.Model.sp_searchStyles_Result)">
-            <Parameter Name="SearchValue" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_searchStyles_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="cat_id" Nullable="false" />
+          <Property Type="String" Name="style_name" Nullable="false" MaxLength="255" />
+        </ComplexType>
         <EntityType Name="Beer">
           <Key>
             <PropertyRef Name="id" />
@@ -175,16 +178,14 @@
           <Property Name="cat_id" Type="Int32" Nullable="false" />
           <Property Name="style_id" Type="Int32" Nullable="false" />
           <Property Name="abv" Type="Single" />
-          <Property Name="ibu" Type="Single" />
-          <Property Name="srm" Type="Single" />
-          <Property Name="upc" Type="Int32" />
           <Property Name="imagepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="add_user" Type="Int32" Nullable="false" />
-          <Property Name="last_mod" Type="DateTime" Precision="0" />
+          <Property Name="upc" Type="Int64" />
           <NavigationProperty Name="Brewery" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Beer" ToRole="Brewery" />
           <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Beer" ToRole="Category" />
           <NavigationProperty Name="Style" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Beer" ToRole="Style" />
+          <Property Name="last_modified" Type="DateTime" Precision="0" />
+          <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Brewery">
           <Key>
@@ -202,9 +203,9 @@
           <Property Name="website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="imagepath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="add_user" Type="Int32" Nullable="false" />
-          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_0" FromRole="Brewery" ToRole="Beer" />
+          <Property Name="last_modified" Type="DateTime" Precision="0" />
+          <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -212,9 +213,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Category" FromRole="Category" ToRole="Beer" />
           <NavigationProperty Name="Styles" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Category" ToRole="Style" />
+          <Property Name="last_modified" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Style">
           <Key>
@@ -223,9 +224,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cat_id" Type="Int32" Nullable="false" />
           <Property Name="style_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_mod" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Beers" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Style" ToRole="Beer" />
           <NavigationProperty Name="Category" Relationship="CellarBot.Model.FK_Styles_Category" FromRole="Style" ToRole="Category" />
+          <Property Name="last_modified" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Beers_0">
           <End Type="CellarBot.Model.Brewery" Role="Brewery" Multiplicity="1">
@@ -279,27 +280,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_searchStyles_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="cat_id" Nullable="false" />
-          <Property Type="String" Name="style_name" Nullable="false" MaxLength="255" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CellarBotModelStoreContainer" CdmEntityContainer="CellarBotEntities">
+          <FunctionImportMapping FunctionImportName="sp_searchStyles" FunctionName="CellarBot.Model.Store.sp_searchStyles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchStyles_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="style_name" ColumnName="style_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Beers">
             <EntityTypeMapping TypeName="CellarBot.Model.Beer">
               <MappingFragment StoreEntitySet="Beers">
-                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
-                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
-                <ScalarProperty Name="add_user" ColumnName="add_user" />
-                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="upc" ColumnName="upc" />
-                <ScalarProperty Name="srm" ColumnName="srm" />
-                <ScalarProperty Name="ibu" ColumnName="ibu" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
                 <ScalarProperty Name="abv" ColumnName="abv" />
                 <ScalarProperty Name="style_id" ColumnName="style_id" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
@@ -312,10 +315,10 @@
           <EntitySetMapping Name="Breweries">
             <EntityTypeMapping TypeName="CellarBot.Model.Brewery">
               <MappingFragment StoreEntitySet="Breweries">
-                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
-                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
-                <ScalarProperty Name="add_user" ColumnName="add_user" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
                 <ScalarProperty Name="website" ColumnName="website" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -332,7 +335,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="CellarBot.Model.Category">
               <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="cat_name" ColumnName="cat_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -341,22 +344,13 @@
           <EntitySetMapping Name="Styles">
             <EntityTypeMapping TypeName="CellarBot.Model.Style">
               <MappingFragment StoreEntitySet="Styles">
-                <ScalarProperty Name="last_mod" ColumnName="last_mod" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="style_name" ColumnName="style_name" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_searchStyles" FunctionName="CellarBot.Model.Store.sp_searchStyles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchStyles_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-                <ScalarProperty Name="style_name" ColumnName="style_name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

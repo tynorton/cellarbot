@@ -79,51 +79,24 @@
                     data: { term: req.term },
                     success: function (data) {
                         resp($.map(data, function (item) {
-                            return { label: item.style_name, value: item.id };
+                            return { label: item.style_name, id: item.id, catId: item.cat_id };
                         }));
                     }
                 });
             },
-            select: function (event, ui) { // keyword selected; parse values and forward off to ProductController's ViewProduct View
+            select: function (event, ui) {
                 var selected = ui.item;
-                var mdlNum, mdlName;
-                if (selected.value !== null) {
-                    var array = selected.value.split(' ');
-                    mdlNum = array[0].toLowerCase();
-                    mdlName = selected.value.replace(array[0], '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                    window.location.replace('http://' + location.host + '/product/' + mdlNum + '_' + mdlName);
-                }
+                console.log(selected);
+                alert(selected.cat_id);
+                document.querySelector("#cat_id").value = selected.catId;
+                document.querySelector("#style_id").value = selected.id;
             }
-        });
-
-        $("#term").keydown(function () {
-            $(this).animate({
-                width: '300'
-            }, {
-                duration: 80,
-                specialEasing: {
-                    width: 'linear',
-                    height: 'easeOutBounce'
-                }
-            });
-        });
-
-        $("#term").blur(function () {
-            $(this).animate({
-                width: '200'
-            }, {
-                duration: 80,
-                specialEasing: {
-                    width: 'linear',
-                    height: 'easeInBounce'
-                }
-            });
         });
     });
 
     function upcScanned(upcResult) {
         document.querySelector("#upc").value = upcResult;
-        document.querySelector("#upc").disabled = true;
+        $("#upc").attr('readonly', true);
         slCtl.Content.RootVisual.StopCamera();
     }
 </script>
@@ -164,7 +137,7 @@
                         <div class="form-group">
                             @Html.Label("Style", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <input id="term" name="term" class="lookup" />
+                                <input id="term" name="term" />
                             </div>
                         </div>
                     }
@@ -174,22 +147,6 @@
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.abv)
                             @Html.ValidationMessageFor(model => model.abv)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ibu, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ibu)
-                            @Html.ValidationMessageFor(model => model.ibu)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.srm, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.srm)
-                            @Html.ValidationMessageFor(model => model.srm)
                         </div>
                     </div>
 
@@ -219,14 +176,6 @@
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.description)
                             @Html.ValidationMessageFor(model => model.description)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.add_user, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.add_user)
-                            @Html.ValidationMessageFor(model => model.add_user)
                         </div>
                     </div>
 

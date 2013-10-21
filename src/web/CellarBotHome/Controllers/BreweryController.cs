@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using PagedList;
 using CellarBotHome.Models;
 using System.Data.Entity.Validation;
+using Microsoft.AspNet.Identity;
 
 namespace CellarBotHome.Controllers
 {
@@ -45,6 +46,8 @@ namespace CellarBotHome.Controllers
         {
             try
             {
+                brewery.last_modified = DateTime.UtcNow;
+                brewery.user_id = User.Identity.GetUserId();
                 CellarBotEntities ents = new CellarBotEntities();
                 ents.Breweries.Add(brewery);
                 ents.SaveChanges();
