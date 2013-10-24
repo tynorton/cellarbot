@@ -225,6 +225,12 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SearchManager.cs" />
+    <Compile Include="Models\sp_searchBeers_Result.cs">
+      <DependentUpon>CellarBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_searchBreweries_Result.cs">
+      <DependentUpon>CellarBotModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_searchStyles_Result.cs">
       <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
@@ -371,6 +377,9 @@
     <Content Include="Views\Brewery\Create.cshtml" />
     <Content Include="Views\Beer\Details.cshtml" />
     <Content Include="Views\Brewery\Details.cshtml" />
+    <Content Include="Views\Beer\CreateBasic.cshtml" />
+    <Content Include="Views\Beer\CreateByUPC.cshtml" />
+    <Content Include="Views\Beer\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Style\" />

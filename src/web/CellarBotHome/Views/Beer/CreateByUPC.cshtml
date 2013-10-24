@@ -1,0 +1,205 @@
+﻿@model CellarBotHome.Models.Beer
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="/Silverlight.js"></script>
+<script type="text/javascript">
+    var slCtl = null;
+    function pluginLoaded(sender) {
+        slCtl = sender.getHost();
+    }
+
+    function onSilverlightError(sender, args) {
+        var appSource = "";
+        if (sender != null && sender != 0) {
+            appSource = sender.getHost().Source;
+        }
+
+        var errorType = args.ErrorType;
+        var iErrorCode = args.ErrorCode;
+
+        if (errorType == "ImageError" || errorType == "MediaError") {
+            return;
+        }
+
+        var errMsg = "Unhandled Error in Silverlight Application " + appSource + "\n";
+
+        errMsg += "Code: " + iErrorCode + "    \n";
+        errMsg += "Category: " + errorType + "       \n";
+        errMsg += "Message: " + args.ErrorMessage + "     \n";
+
+        if (errorType == "ParserError") {
+            errMsg += "File: " + args.xamlFile + "     \n";
+            errMsg += "Line: " + args.lineNumber + "     \n";
+            errMsg += "Position: " + args.charPosition + "     \n";
+        }
+        else if (errorType == "RuntimeError") {
+            if (args.lineNumber != 0) {
+                errMsg += "Line: " + args.lineNumber + "     \n";
+                errMsg += "Position: " + args.charPosition + "     \n";
+            }
+            errMsg += "MethodName: " + args.methodName + "     \n";
+        }
+
+        throw new Error(errMsg);
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#term").autocomplete({
+            minLength: 2,
+            source: function (req, resp) { // get JSON object from SearchController
+                $.ajax({
+                    url: "/Style/Search", // SearchController JsonResult
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: req.term },
+                    success: function (data) {
+                        resp($.map(data, function (item) {
+                            return { label: item.style_name, id: item.id, catId: item.cat_id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var selected = ui.item;
+                document.querySelector("#cat_id").value = selected.catId;
+                document.querySelector("#style_id").value = selected.id;
+            }
+        });
+    });
+
+    $("#brewerySearch").autocomplete({
+        minLength: 2,
+        source: function (req, resp) { // get JSON object from SearchController
+            $.ajax({
+                url: "/Brewery/Search", // SearchController JsonResult
+                type: "POST",
+                dataType: "json",
+                data: { term: req.term },
+                success: function (data) {
+                    resp($.map(data, function (item) {
+                        return { label: item.name, id: item.id };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            var selected = ui.item;
+            document.querySelector("#brewery_id").value = selected.id;
+        }
+    });
+
+    function upcScanned(upcResult) {
+        document.querySelector("#upc").value = upcResult;
+        $("#upc").attr('readonly', true);
+    }
+</script>
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <table style="width:100%;">
+        <tr>
+            <td>
+                <div class="form-horizontal">
+                    <h4>Beer</h4>
+                    <hr />
+                    @Html.ValidationSummary(true)
+
+                    @Html.HiddenFor(model => model.brewery_id)
+                    @using (Html.BeginForm("Search", "Brewery"))
+                    {
+                        <div class="form-group">
+                            @Html.Label("Brewery", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input id="brewerySearch" name="term" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.name)
+                            @Html.ValidationMessageFor(model => model.name)
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.cat_id)
+                    @Html.HiddenFor(model => model.style_id)
+                    @using (Html.BeginForm("Search", "Style"))
+                    {
+                        <div class="form-group">
+                            @Html.Label("Style", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input id="term" name="term" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.Label("ABV", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.abv)
+                            @Html.ValidationMessageFor(model => model.abv)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.upc, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.upc)
+                            @Html.ValidationMessageFor(model => model.upc)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Description", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.description)
+                            @Html.ValidationMessageFor(model => model.description)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <form id="form1" runat="server">
+                    <div id="silverlightControlHost">
+                        <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" style="height:350px;width:400px;">
+                            <param name="source" value="/ClientBin/BarcodeScanner.xap" />
+                            <param name="onLoad" value="pluginLoaded" />
+                            <param name="onError" value="onSilverlightError" />
+                            <param name="background" value="white" />
+                            <param name="minRuntimeVersion" value="5.0.61118.0" />
+                            <param name="autoUpgrade" value="true" />
+                            <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration:none">
+                                <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight" style="border-style:none" />
+                            </a>
+                        </object><iframe id="_sl_historyFrame" style="visibility:hidden;height:0px;width:0px;border:0px"></iframe>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+    
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Switch to Basic Mode", "CreateBasic") 
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -43,6 +43,19 @@ namespace BarcodeScanner
 
             this.m_timer.Tick += btnFreeze_Click;
             this.m_timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            startStop.Click += startStop_Click;
+        }
+
+        void startStop_Click(object sender, RoutedEventArgs e)
+        {
+            if (null == source || source.State == CaptureState.Stopped)
+            {
+                StartCamera();
+            }
+            else if (source.State == CaptureState.Started)
+            {
+                StopCamera();
+            }
         }
 
         void source_CaptureImageCompleted(object sender, CaptureImageCompletedEventArgs e)
@@ -51,7 +64,6 @@ namespace BarcodeScanner
             CapturedImage = e.Result;
         }
 
-        [ScriptableMember]
         public void StartCamera()
         {
             source = new CaptureSource();
@@ -66,13 +78,16 @@ namespace BarcodeScanner
             {
                 source.Start();
                 this.m_timer.Start();
+                startStop.Content = "Cancel";
             }
         }
 
-        [ScriptableMember]
         public void StopCamera()
         {
+            source.Stop();
+            this.m_timer.Stop();
             rectangle2.Fill = null;
+            startStop.Content = "Scan Bottle UPC";
         }
 
         private void btnFreeze_Click(object o, EventArgs sender)
@@ -80,13 +95,15 @@ namespace BarcodeScanner
             source.CaptureImageCompleted += new EventHandler<CaptureImageCompletedEventArgs>(source_CaptureImageCompleted);
             source.CaptureImageAsync();
 
-            var result = reader.Decode(CapturedImage);
-            if (result != null)
+            if (null != CapturedImage)
             {
-                source.Stop();
-                this.m_timer.Stop();
+                var result = reader.Decode(CapturedImage);
+                if (result != null)
+                {
+                    StopCamera();
 
-                HtmlPage.Window.Invoke("upcScanned", result.Text);
+                    HtmlPage.Window.Invoke("upcScanned", result.Text);
+                }
             }
         }
     }

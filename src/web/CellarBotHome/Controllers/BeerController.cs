@@ -35,6 +35,11 @@ namespace CellarBotHome.Controllers
         // GET: /Beer/Create
         public ActionResult Create()
         {
+            return View();
+        }
+
+        public ActionResult CreateByUPC()
+        {
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index");
@@ -43,10 +48,7 @@ namespace CellarBotHome.Controllers
             return View();
         }
 
-        //
-        // POST: /Beer/Create
-        [HttpPost]
-        public ActionResult Create(Beer beer)
+        public ActionResult CreateBeer(Beer beer)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -69,6 +71,32 @@ namespace CellarBotHome.Controllers
             {
                 return RedirectToAction("Index");
             }
+        }
+
+        //
+        // POST: /Beer/Create
+        [HttpPost]
+        public ActionResult CreateByUPC(Beer beer)
+        {
+            return CreateBeer(beer);
+        }
+
+        public ActionResult CreateBasic()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        //
+        // POST: /Beer/Create
+        [HttpPost]
+        public ActionResult CreateBasic(Beer beer)
+        {
+            return CreateBeer(beer);
         }
 
         //
@@ -117,6 +145,25 @@ namespace CellarBotHome.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult SearchResults(string searchTerm, int? page)
+        {
+            var manager = new SearchManager();
+            var results = manager.GetBeerSearchResults(searchTerm);
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfBeers = results.OrderBy(obj => obj.name).ToPagedList(pageNumber, 25);
+
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(onePageOfBeers);
+        }
+
+        public JsonResult Search(string term)
+        {
+            var manager = new SearchManager();
+            var results = manager.GetBeerSearchResults(term);
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
     }
 }

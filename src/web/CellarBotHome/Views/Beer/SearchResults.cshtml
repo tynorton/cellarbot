@@ -1,0 +1,18 @@
+﻿@model IEnumerable<CellarBotHome.Models.sp_searchBeers_Result>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Search Results for '@ViewBag.SearchTerm'</h2>
+
+<ul>
+    @foreach (var beer in Model)
+    {
+        <li>@Html.ActionLink((string)beer.name, "Details", new { id = beer.id })</li>
+    }
+</ul>
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("SearchResults", new { page, searchTerm = ViewBag.SearchTerm }))

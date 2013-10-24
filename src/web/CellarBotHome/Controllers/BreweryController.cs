@@ -117,5 +117,12 @@ namespace CellarBotHome.Controllers
                 return View();
             }
         }
+
+        public JsonResult Search(string term)
+        {
+            var manager = new SearchManager();
+            var results = manager.GetBrewerySearchResults(term);
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
     }
 }

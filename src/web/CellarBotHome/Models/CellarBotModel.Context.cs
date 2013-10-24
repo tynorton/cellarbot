@@ -40,5 +40,23 @@ namespace CellarBotHome.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_searchStyles_Result>("sp_searchStyles", searchValueParameter);
         }
+    
+        public virtual ObjectResult<sp_searchBeers_Result> sp_searchBeers(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("SearchValue", searchValue) :
+                new ObjectParameter("SearchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_searchBeers_Result>("sp_searchBeers", searchValueParameter);
+        }
+    
+        public virtual ObjectResult<sp_searchBreweries_Result> sp_searchBreweries(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("SearchValue", searchValue) :
+                new ObjectParameter("SearchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_searchBreweries_Result>("sp_searchBreweries", searchValueParameter);
+        }
     }
 }

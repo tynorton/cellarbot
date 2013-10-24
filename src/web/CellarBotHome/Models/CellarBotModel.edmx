@@ -109,6 +109,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_searchBeers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_searchBreweries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchValue" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_searchStyles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchValue" Type="nvarchar" Mode="In" />
         </Function>
@@ -162,6 +168,12 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Style" EntitySet="Styles" />
           </AssociationSet>
+          <FunctionImport Name="sp_searchBeers" ReturnType="Collection(CellarBot.Model.sp_searchBeers_Result)">
+            <Parameter Name="SearchValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_searchBreweries" ReturnType="Collection(CellarBot.Model.sp_searchBreweries_Result)">
+            <Parameter Name="SearchValue" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_searchStyles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -280,6 +292,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_searchBeers_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="sp_searchBreweries_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -351,6 +371,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchBeers" FunctionName="CellarBot.Model.Store.sp_searchBeers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchBeers_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchBreweries" FunctionName="CellarBot.Model.Store.sp_searchBreweries">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchBreweries_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

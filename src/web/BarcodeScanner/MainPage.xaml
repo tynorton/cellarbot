@@ -8,15 +8,8 @@
 
     <Grid x:Name="LayoutRoot" Background="White">
         <StackPanel>
-            <Image HorizontalAlignment="Left" Name="imgDecoderBarcode" Stretch="None" VerticalAlignment="Top" />
-            <Grid HorizontalAlignment="Left" Name="grid3" VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="29" />
-                    <RowDefinition Height="29" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-            </Grid>
-            <Rectangle HorizontalAlignment="Left" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="240" Height="180" />
+            <Button Name="startStop" Height="35" Width="200" FontSize="18" Margin="0,20,0,20">Scan Bottle UPC</Button>
+            <Rectangle Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="360" Height="270" />
         </StackPanel>
     </Grid>
 </UserControl>
