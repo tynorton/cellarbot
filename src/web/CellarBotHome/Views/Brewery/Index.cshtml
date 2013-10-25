@@ -6,7 +6,56 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>List of Breweries</h2>
+<script>
+    $(document).ready(function () {
+        $("#brewerySearch").autocomplete({
+            minLength: 2,
+            source: function (req, resp) { // get JSON object
+                $.ajax({
+                    url: "/Brewery/Search", // search JsonResult
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: req.term },
+                    success: function (data) {
+                        resp($.map(data, function (item) {
+                            return { label: item.name, id: item.id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var selected = ui.item;
+                navigateToBeer(selected.id);
+            }
+        });
+    });
+
+    function navigateToBeer(beerNum) {
+        var replaceMe = 1234;
+        var actionUrl = '@Url.Action("Details", "Brewery", new { id = 1234 } )';
+
+        window.location = actionUrl.replace(replaceMe, beerNum);
+    }
+</script>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>List of Breweries</h2>
+    </div>
+
+    <div class="col-md-4" style="padding-top:10px;">
+        @using (Html.BeginForm("SearchResults", "Brewery"))
+        {
+            <label class="col-md-6">
+                Brewery Search
+            </label>
+            <div class="col-md-10">
+                <input id="brewerySearch" name="searchTerm" />
+            </div>
+        }
+    </div>
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

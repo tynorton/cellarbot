@@ -20,6 +20,7 @@
           <Property Name="last_modified" Type="datetime2" Precision="0" />
           <Property Name="upc" Type="bigint" />
           <Property Name="user_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="is_retired" Type="bit" />
         </EntityType>
         <EntityType Name="Breweries">
           <Key>
@@ -169,10 +170,10 @@
             <End Role="Style" EntitySet="Styles" />
           </AssociationSet>
           <FunctionImport Name="sp_searchBeers" ReturnType="Collection(CellarBot.Model.sp_searchBeers_Result)">
-            <Parameter Name="SearchValue" Mode="In" Type="String" />
+          <Parameter Name="SearchValue" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_searchBreweries" ReturnType="Collection(CellarBot.Model.sp_searchBreweries_Result)">
-            <Parameter Name="SearchValue" Mode="In" Type="String" />
+          <Parameter Name="SearchValue" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_searchStyles_Result">
@@ -198,6 +199,7 @@
           <NavigationProperty Name="Style" Relationship="CellarBot.Model.FK_Beers_Styles" FromRole="Beer" ToRole="Style" />
           <Property Name="last_modified" Type="DateTime" Precision="0" />
           <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="is_retired" Type="Boolean" />
         </EntityType>
         <EntityType Name="Brewery">
           <Key>
@@ -293,8 +295,10 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="sp_searchBeers_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="beer_id" Nullable="false" />
+          <Property Type="String" Name="beer_name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="brewery_id" Nullable="false" />
+          <Property Type="String" Name="brewery_name" Nullable="false" MaxLength="255" />
         </ComplexType>
         <ComplexType Name="sp_searchBreweries_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -318,6 +322,7 @@
           <EntitySetMapping Name="Beers">
             <EntityTypeMapping TypeName="CellarBot.Model.Beer">
               <MappingFragment StoreEntitySet="Beers">
+                <ScalarProperty Name="is_retired" ColumnName="is_retired" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="upc" ColumnName="upc" />
@@ -371,19 +376,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_searchBeers" FunctionName="CellarBot.Model.Store.sp_searchBeers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchBeers_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_searchBreweries" FunctionName="CellarBot.Model.Store.sp_searchBreweries">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchBreweries_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchBeers" FunctionName="CellarBot.Model.Store.sp_searchBeers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CellarBot.Model.sp_searchBeers_Result">
+                <ScalarProperty Name="beer_id" ColumnName="beer_id" />
+                <ScalarProperty Name="beer_name" ColumnName="beer_name" />
+                <ScalarProperty Name="brewery_id" ColumnName="brewery_id" />
+                <ScalarProperty Name="brewery_name" ColumnName="brewery_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

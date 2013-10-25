@@ -24,7 +24,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Brewery.name)
+            @Html.ActionLink(Model.Brewery.name, "Details", "Brewery", new { id = Model.brewery_id }, new { })
         </dd>
 
         <dt>

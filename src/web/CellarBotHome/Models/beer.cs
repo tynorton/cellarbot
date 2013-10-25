@@ -25,6 +25,7 @@ namespace CellarBotHome.Models
         public Nullable<long> upc { get; set; }
         public Nullable<System.DateTime> last_modified { get; set; }
         public string user_id { get; set; }
+        public Nullable<bool> is_retired { get; set; }
     
         public virtual Brewery Brewery { get; set; }
         public virtual Category Category { get; set; }

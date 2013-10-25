@@ -17,7 +17,9 @@ namespace CellarBotHome.Controllers
         {
             var ents = new CellarBotHome.Models.CellarBotEntities();
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfBeers = ents.Beers.OrderBy(obj => obj.name).ToPagedList(pageNumber, 25); // will only contain 25 items max because of the pageSize
+            var onePageOfBeers = ents.Beers
+                .OrderBy(obj => obj.Brewery.name + " - " + obj.name)
+                .ToPagedList(pageNumber, 25); // will only contain 25 items max because of the pageSize
 
             ViewBag.OnePageOfBeers = onePageOfBeers;
             return View();
@@ -103,17 +105,30 @@ namespace CellarBotHome.Controllers
         // GET: /Beer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            CellarBotEntities ents = new CellarBotEntities();
+            return View((from b in ents.Beers where b.id == id select b).FirstOrDefault());
         }
 
         //
         // POST: /Beer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Beer beer)
         {
             try
             {
-                // TODO: Add update logic here
+                CellarBotEntities ents = new CellarBotEntities();
+                var storedBeer = (from b in ents.Beers where b.id == beer.id select b).FirstOrDefault();
+                storedBeer.abv = beer.abv;
+                storedBeer.brewery_id = beer.brewery_id;
+                storedBeer.cat_id = beer.cat_id;
+                storedBeer.description = beer.description;
+                storedBeer.last_modified = DateTime.UtcNow;
+                storedBeer.name = beer.name;
+                storedBeer.style_id = beer.style_id;
+                storedBeer.upc = beer.upc;
+                storedBeer.user_id = beer.user_id;
+
+                ents.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -152,7 +167,7 @@ namespace CellarBotHome.Controllers
             var manager = new SearchManager();
             var results = manager.GetBeerSearchResults(searchTerm);
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfBeers = results.OrderBy(obj => obj.name).ToPagedList(pageNumber, 25);
+            var onePageOfBeers = results.ToPagedList(pageNumber, 25);
 
             ViewBag.SearchTerm = searchTerm;
 

@@ -62,22 +62,30 @@
         <hr />
         @Html.ValidationSummary(true)
 
+        <div class="form-group">
+            @Html.Label("Beer Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
         @Html.HiddenFor(model => model.brewery_id)
         @using (Html.BeginForm("Search", "Brewery"))
         {
             <div class="form-group">
                 @Html.Label("Brewery", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="brewerySearch" name="term" />
+                    <input id="brewerySearch" name="term" type="text" />
                 </div>
             </div>
         }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            @Html.Label("Description", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.name)
-                @Html.ValidationMessageFor(model => model.name)
+                @Html.TextAreaFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
             </div>
         </div>
 
@@ -88,7 +96,7 @@
             <div class="form-group">
                 @Html.Label("Style", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="styleSearch" name="term" />
+                    <input id="styleSearch" name="term" type="text" />
                 </div>
             </div>
         }
@@ -98,14 +106,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.abv)
                 @Html.ValidationMessageFor(model => model.abv)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Description", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description)
-                @Html.ValidationMessageFor(model => model.description)
             </div>
         </div>
 

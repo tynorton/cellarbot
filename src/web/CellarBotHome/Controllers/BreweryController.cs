@@ -29,7 +29,10 @@ namespace CellarBotHome.Controllers
         public ActionResult Details(int id)
         {
             CellarBotEntities ents = new CellarBotEntities();
-            return View((from b in ents.Breweries where b.id == id select b).FirstOrDefault());
+            var brewery = (from b in ents.Breweries where b.id == id select b).FirstOrDefault();
+            ViewBag.Beers = brewery.Beers.OrderBy(obj => obj.name);
+
+            return View(brewery);
         }
 
         //
@@ -74,17 +77,31 @@ namespace CellarBotHome.Controllers
         // GET: /Brewery/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            CellarBotEntities ents = new CellarBotEntities();
+            return View((from b in ents.Breweries where b.id == id select b).FirstOrDefault());
         }
 
         //
         // POST: /Brewery/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Brewery brewery)
         {
             try
             {
-                // TODO: Add update logic here
+                CellarBotEntities ents = new CellarBotEntities();
+                var storedBrewery = (from b in ents.Breweries where b.id == brewery.id select b).FirstOrDefault();
+                storedBrewery.address1 = brewery.address1;
+                storedBrewery.address2 = brewery.address2;
+                storedBrewery.city = brewery.city;
+                storedBrewery.country = brewery.country;
+                storedBrewery.description = brewery.description;
+                storedBrewery.last_modified = DateTime.UtcNow;
+                storedBrewery.name = brewery.name;
+                storedBrewery.phone = brewery.phone;
+                storedBrewery.state = brewery.state;
+                storedBrewery.user_id = brewery.user_id;
+                storedBrewery.website = brewery.website;
+                ents.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -116,6 +133,18 @@ namespace CellarBotHome.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult SearchResults(string searchTerm, int? page)
+        {
+            var manager = new SearchManager();
+            var results = manager.GetBrewerySearchResults(searchTerm);
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfBreweries = results.ToPagedList(pageNumber, 25);
+
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(onePageOfBreweries);
         }
 
         public JsonResult Search(string term)

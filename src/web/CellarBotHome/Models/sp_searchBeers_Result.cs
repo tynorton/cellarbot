@@ -13,7 +13,9 @@ namespace CellarBotHome.Models
     
     public partial class sp_searchBeers_Result
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int beer_id { get; set; }
+        public string beer_name { get; set; }
+        public int brewery_id { get; set; }
+        public string brewery_name { get; set; }
     }
 }

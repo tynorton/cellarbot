@@ -380,6 +380,9 @@
     <Content Include="Views\Beer\CreateBasic.cshtml" />
     <Content Include="Views\Beer\CreateByUPC.cshtml" />
     <Content Include="Views\Beer\SearchResults.cshtml" />
+    <Content Include="Views\Brewery\Edit.cshtml" />
+    <Content Include="Views\Brewery\SearchResults.cshtml" />
+    <Content Include="Views\Beer\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Style\" />

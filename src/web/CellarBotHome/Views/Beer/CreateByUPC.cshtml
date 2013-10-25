@@ -104,100 +104,97 @@
 {
     @Html.AntiForgeryToken()
 
-    <table style="width:100%;">
-        <tr>
-            <td>
-                <div class="form-horizontal">
-                    <h4>Beer</h4>
-                    <hr />
-                    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+                <h4>Beer</h4>
+                <hr />
+                @Html.ValidationSummary(true)
 
-                    @Html.HiddenFor(model => model.brewery_id)
-                    @using (Html.BeginForm("Search", "Brewery"))
-                    {
-                        <div class="form-group">
-                            @Html.Label("Brewery", new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <input id="brewerySearch" name="term" />
-                            </div>
-                        </div>
-                    }
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.name)
-                            @Html.ValidationMessageFor(model => model.name)
-                        </div>
-                    </div>
-
-                    @Html.HiddenFor(model => model.cat_id)
-                    @Html.HiddenFor(model => model.style_id)
-                    @using (Html.BeginForm("Search", "Style"))
-                    {
-                        <div class="form-group">
-                            @Html.Label("Style", new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <input id="term" name="term" />
-                            </div>
-                        </div>
-                    }
-
-                    <div class="form-group">
-                        @Html.Label("ABV", new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.abv)
-                            @Html.ValidationMessageFor(model => model.abv)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.upc, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.upc)
-                            @Html.ValidationMessageFor(model => model.upc)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Description", new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.description)
-                            @Html.ValidationMessageFor(model => model.description)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
+                <div class="form-group">
+                    @Html.Label("Beer Name", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.name)
+                        @Html.ValidationMessageFor(model => model.name)
                     </div>
                 </div>
-            </td>
-            <td>
-                <form id="form1" runat="server">
-                    <div id="silverlightControlHost">
-                        <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" style="height:350px;width:400px;">
-                            <param name="source" value="/ClientBin/BarcodeScanner.xap" />
-                            <param name="onLoad" value="pluginLoaded" />
-                            <param name="onError" value="onSilverlightError" />
-                            <param name="background" value="white" />
-                            <param name="minRuntimeVersion" value="5.0.61118.0" />
-                            <param name="autoUpgrade" value="true" />
-                            <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration:none">
-                                <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight" style="border-style:none" />
-                            </a>
-                        </object><iframe id="_sl_historyFrame" style="visibility:hidden;height:0px;width:0px;border:0px"></iframe>
+
+                @Html.HiddenFor(model => model.brewery_id)
+                @using (Html.BeginForm("Search", "Brewery"))
+                {
+                    <div class="form-group">
+                        @Html.Label("Brewery", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input id="brewerySearch" name="term" type="text" />
+                        </div>
                     </div>
-                </form>
-            </td>
-        </tr>
-    </table>
-    
+                }
+
+                <div class="form-group">
+                    @Html.Label("Description", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.description)
+                        @Html.ValidationMessageFor(model => model.description)
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.cat_id)
+                @Html.HiddenFor(model => model.style_id)
+                @using (Html.BeginForm("Search", "Style"))
+                {
+                    <div class="form-group">
+                        @Html.Label("Style", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input id="term" name="term" type="text" />
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    @Html.Label("ABV", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.abv)
+                        @Html.ValidationMessageFor(model => model.abv)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.upc, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.upc)
+                        @Html.ValidationMessageFor(model => model.upc)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <form id="form1" runat="server">
+                <div id="silverlightControlHost">
+                    <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" style="height:350px;width:400px;">
+                        <param name="source" value="/ClientBin/BarcodeScanner.xap" />
+                        <param name="onLoad" value="pluginLoaded" />
+                        <param name="onError" value="onSilverlightError" />
+                        <param name="background" value="white" />
+                        <param name="minRuntimeVersion" value="5.0.61118.0" />
+                        <param name="autoUpgrade" value="true" />
+                        <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration:none">
+                            <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight" style="border-style:none" />
+                        </a>
+                    </object><iframe id="_sl_historyFrame" style="visibility:hidden;height:0px;width:0px;border:0px"></iframe>
+                </div>
+            </form>
+        </div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Switch to Basic Mode", "CreateBasic") 
+    @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Switch to Basic Mode", "CreateBasic")
 </div>
 
 @section Scripts {

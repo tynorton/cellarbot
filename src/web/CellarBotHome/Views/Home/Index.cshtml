@@ -13,13 +13,25 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Total Breweries</h2>
-        <p>@breweryCount</p>
+        <table>
+            <tr>
+                <td><h3>Total Breweries</h3></td>
+            </tr>
+            <tr>
+                <td>@breweryCount</td>
+            </tr>
+        </table>
         <p><a class="btn btn-default" href="@Url.Action("Index", "Brewery", null)">Brewery List &raquo;</a></p>
     </div>
     <div class="col-md-6">
-        <h2>Total Beers</h2>
-        <p>@beerCount</p>
+        <table>
+            <tr>
+                <td><h3>Total Beers</h3></td>
+            </tr>
+            <tr>
+                <td>@beerCount</td>
+            </tr>
+        </table>
         <p><a class="btn btn-default" href="@Url.Action("Index", "Beer", null)">Beer List &raquo;</a></p>
     </div>
 </div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CellarBotHome.Models.sp_searchBeers_Result>
+﻿@model IEnumerable<CellarBotHome.Models.sp_searchBreweries_Result>
 @using PagedList;
 @using PagedList.Mvc;
 
@@ -9,9 +9,9 @@
 <h2>@ViewBag.Title</h2>
 
 <ul>
-    @foreach (var beer in Model)
+    @foreach (var brewery in Model)
     {
-        <li>@Html.ActionLink(beer.brewery_name + " - " + beer.beer_name, "Details", new { id = beer.beer_id })</li>
+        <li>@Html.ActionLink((string)brewery.name, "Details", new { id = brewery.id })</li>
     }
 </ul>
 <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->

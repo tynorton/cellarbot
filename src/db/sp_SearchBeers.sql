@@ -1,18 +1,28 @@
+USE [CellarBot]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_searchBeers]    Script Date: 10/24/2013 11:26:54 PM ******/
+DROP PROCEDURE [dbo].[sp_searchBeers]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_searchBeers]    Script Date: 10/24/2013 11:26:54 PM ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
--- Check to see if the sproc already exist
-IF OBJECT_ID ( 'sp_searchBeers', 'P' ) IS NOT NULL 
-    DROP PROCEDURE sp_searchBeers;
-GO
-CREATE PROCEDURE sp_searchBeers
+CREATE PROCEDURE [dbo].[sp_searchBeers]
     @SearchValue nvarchar(255)
 AS 
 BEGIN
     SET NOCOUNT ON;
-    SELECT id, name
+    SELECT beer_id=Beers.id, beer_name=Beers.name, brewery_id=Breweries.id, brewery_name=Breweries.name
     FROM Beers
-    WHERE name LIKE '%' + @SearchValue +'%';
+	INNER JOIN Breweries
+	ON Beers.brewery_id=Breweries.id
+    WHERE Beers.name LIKE '%' + @SearchValue +'%' OR Breweries.name LIKE '%' + @SearchValue +'%';
 END
+GO
+
+

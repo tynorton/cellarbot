@@ -5,20 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="jumbotron">
+    <h1>@Html.DisplayFor(model => model.name)</h1>
 
-<div>
-    <h4>Brewery</h4>
-	<hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.address1)
         </dt>
@@ -101,7 +91,16 @@
 
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<h2>Beers</h2>
+<ul>
+    @foreach (var beer in ViewBag.Beers)
+    {
+        <li>@Html.ActionLink((string)beer.name, "Details", "Beer", new { id = beer.id }, new { })</li>
+    }
+</ul>
