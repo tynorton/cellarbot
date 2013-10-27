@@ -36,7 +36,9 @@ namespace BarcodeScanner
             set { _capimage = value; }
         }
 
-
+        const int SilverlightDPI = 96;
+        double m_xScale, m_yScale;
+        HtmlElement m_videoFrame;
         public MainPage()
         {
             InitializeComponent();

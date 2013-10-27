@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeerController.cs" />
     <Compile Include="Controllers\BreweryController.cs" />
+    <Compile Include="Controllers\CellarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,6 +207,9 @@
       <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>CellarBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cellar.cs">
       <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CellarBotModel.Context.cs">
@@ -222,6 +226,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CellarBotModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CellarEntry.cs">
+      <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SearchManager.cs" />
@@ -383,6 +390,10 @@
     <Content Include="Views\Brewery\Edit.cshtml" />
     <Content Include="Views\Brewery\SearchResults.cshtml" />
     <Content Include="Views\Beer\Edit.cshtml" />
+    <Content Include="Views\Cellar\Index.cshtml" />
+    <Content Include="Views\Cellar\Details.cshtml" />
+    <Content Include="Views\Cellar\Edit.cshtml" />
+    <Content Include="Views\Cellar\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Style\" />

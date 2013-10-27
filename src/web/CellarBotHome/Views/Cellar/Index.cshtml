@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CellarBotHome.Models.Cellar>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Your Cellars</h2>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Create New", "Create")
+</div>
+
+<ul>
+    @foreach (var cellar in Model)
+    {
+        <li>@Html.ActionLink((string)cellar.Name, "Details", new { id = cellar.ID })</li>
+    }
+</ul>
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))

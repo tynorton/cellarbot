@@ -49,6 +49,24 @@
           <Property Name="cat_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="last_modified" Type="datetime2" Precision="0" />
         </EntityType>
+        <EntityType Name="CellarEntries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="BeerID" Type="int" Nullable="false" />
+          <Property Name="CellarID" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="Cellars">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Styles">
           <Key>
             <PropertyRef Name="id" />
@@ -96,6 +114,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CellarEntries_0">
+          <End Role="Beers" Type="Self.Beers" Multiplicity="1" />
+          <End Role="CellarEntries" Type="Self.CellarEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CellarEntries">
+              <PropertyRef Name="BeerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Styles_Category">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -123,6 +153,8 @@
           <EntitySet Name="Beers" EntityType="Self.Beers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Breweries" EntityType="Self.Breweries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CellarEntries" EntityType="Self.CellarEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cellars" EntityType="Self.Cellars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Styles" EntityType="Self.Styles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Beers_0" Association="Self.FK_Beers_0">
             <End Role="Breweries" EntitySet="Breweries" />
@@ -135,6 +167,10 @@
           <AssociationSet Name="FK_Beers_Styles" Association="Self.FK_Beers_Styles">
             <End Role="Styles" EntitySet="Styles" />
             <End Role="Beers" EntitySet="Beers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CellarEntries_0" Association="Self.FK_CellarEntries_0">
+            <End Role="Beers" EntitySet="Beers" />
+            <End Role="CellarEntries" EntitySet="CellarEntries" />
           </AssociationSet>
           <AssociationSet Name="FK_Styles_Category" Association="Self.FK_Styles_Category">
             <End Role="Categories" EntitySet="Categories" />
@@ -175,6 +211,16 @@
           <FunctionImport Name="sp_searchBreweries" ReturnType="Collection(CellarBot.Model.sp_searchBreweries_Result)">
           <Parameter Name="SearchValue" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CellarEntries" EntityType="CellarBot.Model.CellarEntry" />
+          <EntitySet Name="Cellars" EntityType="CellarBot.Model.Cellar" />
+          <AssociationSet Name="FK_CellarEntries_0" Association="CellarBot.Model.FK_CellarEntries_0">
+            <End Role="Beer" EntitySet="Beers" />
+            <End Role="CellarEntry" EntitySet="CellarEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CellarEntries_1" Association="CellarBot.Model.FK_CellarEntries_1">
+            <End Role="Cellar" EntitySet="Cellars" />
+            <End Role="CellarEntry" EntitySet="CellarEntries" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_searchStyles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -200,6 +246,7 @@
           <Property Name="last_modified" Type="DateTime" Precision="0" />
           <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="is_retired" Type="Boolean" />
+          <NavigationProperty Name="CellarEntries" Relationship="CellarBot.Model.FK_CellarEntries_0" FromRole="Beer" ToRole="CellarEntry" />
         </EntityType>
         <EntityType Name="Brewery">
           <Key>
@@ -304,6 +351,51 @@
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
         </ComplexType>
+        <EntityType Name="CellarEntry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="BeerID" Type="Int32" Nullable="false" />
+          <Property Name="CellarID" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Beer" Relationship="CellarBot.Model.FK_CellarEntries_0" FromRole="CellarEntry" ToRole="Beer" />
+          <NavigationProperty Name="Cellar" Relationship="CellarBot.Model.FK_CellarEntries_1" FromRole="CellarEntry" ToRole="Cellar" />
+        </EntityType>
+        <EntityType Name="Cellar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CellarEntries" Relationship="CellarBot.Model.FK_CellarEntries_1" FromRole="Cellar" ToRole="CellarEntry" />
+        </EntityType>
+        <Association Name="FK_CellarEntries_0">
+          <End Type="CellarBot.Model.Beer" Role="Beer" Multiplicity="1" />
+          <End Type="CellarBot.Model.CellarEntry" Role="CellarEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CellarEntry">
+              <PropertyRef Name="BeerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CellarEntries_1">
+          <End Type="CellarBot.Model.Cellar" Role="Cellar" Multiplicity="1" />
+          <End Type="CellarBot.Model.CellarEntry" Role="CellarEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cellar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CellarEntry">
+              <PropertyRef Name="CellarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -394,6 +486,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CellarEntries">
+            <EntityTypeMapping TypeName="CellarBot.Model.CellarEntry">
+              <MappingFragment StoreEntitySet="CellarEntries">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CellarID" ColumnName="CellarID" />
+                <ScalarProperty Name="BeerID" ColumnName="BeerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cellars">
+            <EntityTypeMapping TypeName="CellarBot.Model.Cellar">
+              <MappingFragment StoreEntitySet="Cellars">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

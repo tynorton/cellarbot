@@ -13,6 +13,10 @@
         <AssociationConnector Association="CellarBot.Model.FK_Beers_Category" />
         <AssociationConnector Association="CellarBot.Model.FK_Beers_Styles" />
         <AssociationConnector Association="CellarBot.Model.FK_Styles_Category" />
+        <EntityTypeShape EntityType="CellarBot.Model.CellarEntry" Width="1.5" PointX="7.5" PointY="6" />
+        <EntityTypeShape EntityType="CellarBot.Model.Cellar" Width="1.5" PointX="5.25" PointY="2.25" />
+        <AssociationConnector Association="CellarBot.Model.FK_CellarEntries_0" />
+        <AssociationConnector Association="CellarBot.Model.FK_CellarEntries_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -31,6 +31,8 @@ namespace CellarBotHome.Models
         public virtual DbSet<Brewery> Breweries { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
+        public virtual DbSet<CellarEntry> CellarEntries { get; set; }
+        public virtual DbSet<Cellar> Cellars { get; set; }
     
         public virtual ObjectResult<sp_searchStyles_Result> sp_searchStyles(string searchValue)
         {
