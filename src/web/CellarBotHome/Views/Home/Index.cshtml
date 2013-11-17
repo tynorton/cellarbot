@@ -1,9 +1,12 @@
-﻿@{
+﻿@using CellarBotHome.Models;
+@using Microsoft.AspNet.Identity;
+
+@{
     ViewBag.Title = "Home Page";
 
-    var ents = new CellarBotHome.Models.CellarBotEntities();
-    var beerCount = ents.Beers.Count();
-    var breweryCount = ents.Breweries.Count();
+    var userId = User.Identity.GetUserId();
+    var ents = new CellarBotEntities();
+    var cellars = CellarHelper.GetUserCellars(userId);
 }
 
 <div class="jumbotron">
@@ -12,27 +15,19 @@
     <p><a class="btn btn-primary btn-large" href="@Url.Action("Index", "Cellar")">Manage your cellars &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <table>
-            <tr>
-                <td><h3>Total Breweries</h3></td>
-            </tr>
-            <tr>
-                <td>@breweryCount</td>
-            </tr>
-        </table>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Brewery", null)">Brewery List &raquo;</a></p>
+@if (cellars.Any())
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Your Cellars</h2>
+            <div>
+                <ul>
+                    @foreach (var cellar in cellars)
+                    {
+                        <li>@cellar.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        <table>
-            <tr>
-                <td><h3>Total Beers</h3></td>
-            </tr>
-            <tr>
-                <td>@beerCount</td>
-            </tr>
-        </table>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Beer", null)">Beer List &raquo;</a></p>
-    </div>
-</div>
+}

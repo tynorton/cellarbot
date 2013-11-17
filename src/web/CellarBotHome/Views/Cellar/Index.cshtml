@@ -7,6 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (User.Identity.IsAuthenticated) {
 <div class="row">
     <div class="col-md-8">
         <h2>Your Cellars</h2>
@@ -25,3 +26,9 @@
 </ul>
 <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
 @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))
+}
+else {
+ <div>
+     You need to log in first
+ </div>   
+}

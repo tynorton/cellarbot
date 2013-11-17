@@ -230,6 +230,7 @@
     <Compile Include="Models\CellarEntry.cs">
       <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CellarHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SearchManager.cs" />
     <Compile Include="Models\sp_searchBeers_Result.cs">
@@ -394,6 +395,7 @@
     <Content Include="Views\Cellar\Details.cshtml" />
     <Content Include="Views\Cellar\Edit.cshtml" />
     <Content Include="Views\Cellar\Create.cshtml" />
+    <Content Include="Views\Cellar\AddToCellar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Style\" />

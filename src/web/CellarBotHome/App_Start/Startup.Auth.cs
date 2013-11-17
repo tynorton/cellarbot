@@ -16,21 +16,22 @@ namespace CellarBotHome
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login")
             });
+
             // Use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
+            /*app.UseMicrosoftAccountAuthentication(
                 clientId: "000000004410590E",
-                clientSecret: "KkNaTPlt6NPSOlVdWAsNvE4lRileTVbG");
+                clientSecret: "KkNaTPlt6NPSOlVdWAsNvE4lRileTVbG");*/
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
+            /*app.UseFacebookAuthentication(
                appId: "153007284908556",
-                appSecret: "9005da0d3650470c56123907625c0a22");
+                appSecret: "9005da0d3650470c56123907625c0a22");*/
 
             app.UseGoogleAuthentication();
         }
