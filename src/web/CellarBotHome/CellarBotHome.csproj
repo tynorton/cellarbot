@@ -396,6 +396,10 @@
     <Content Include="Views\Cellar\Edit.cshtml" />
     <Content Include="Views\Cellar\Create.cshtml" />
     <Content Include="Views\Cellar\AddToCellar.cshtml" />
+    <Content Include="Views\Cellar\AddToCellar\_AddABeer.cshtml" />
+    <Content Include="Views\Cellar\AddToCellar\_PickCellar.cshtml" />
+    <Content Include="Views\Cellar\AddToCellar\_AddToCellar.cshtml" />
+    <Content Include="Views\Cellar\AddToCellar\_BeerList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Style\" />

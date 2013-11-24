@@ -58,6 +58,7 @@
           <Property Name="CellarID" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
+          <Property Name="Year" Type="int" />
         </EntityType>
         <EntityType Name="Cellars">
           <Key>
@@ -362,6 +363,7 @@
           <Property Name="Count" Type="Int32" />
           <NavigationProperty Name="Beer" Relationship="CellarBot.Model.FK_CellarEntries_0" FromRole="CellarEntry" ToRole="Beer" />
           <NavigationProperty Name="Cellar" Relationship="CellarBot.Model.FK_CellarEntries_1" FromRole="CellarEntry" ToRole="Cellar" />
+          <Property Name="Year" Type="Int32" />
         </EntityType>
         <EntityType Name="Cellar">
           <Key>
@@ -489,6 +491,7 @@
           <EntitySetMapping Name="CellarEntries">
             <EntityTypeMapping TypeName="CellarBot.Model.CellarEntry">
               <MappingFragment StoreEntitySet="CellarEntries">
+                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="CellarID" ColumnName="CellarID" />

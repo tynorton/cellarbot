@@ -58,6 +58,33 @@ namespace CellarBotHome.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CommitCellarAddition(int cellarId, int beerId, int year, int count, string notes = null)
+        {
+            var userId = User.Identity.GetUserId();
+            var cellar = CellarHelper.GetCellar(cellarId);
+            if (cellar.UserID == userId)
+            {
+                var entry = cellar.CellarEntries.FirstOrDefault(obj => obj.BeerID == beerId && obj.Year == year);
+                if (null != entry)
+                {
+                    entry.Count += count;
+                    entry.Notes = notes;
+                    ents.SaveChanges();
+                }
+                else
+                {
+                    entry = new CellarEntry { Year = year, BeerID = beerId, Count = count, CellarID = cellarId, Notes = notes };
+                    ents.CellarEntries.Add(entry);
+                    ents.SaveChanges();
+                }
+
+                return RedirectToAction("Details", new { id = cellar.ID });
+            }
+
+            return View();
+        }
+
         //
         // GET: /Cellar/
         public ActionResult Index(int? page)

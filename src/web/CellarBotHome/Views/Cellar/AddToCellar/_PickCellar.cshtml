@@ -1,0 +1,10 @@
+﻿<h2>Pick a cellar to add to</h2>
+<div>
+    <ul>
+        @foreach (CellarBotHome.Models.Cellar cellar in Model)
+        {
+            <li>@Html.ActionLink(cellar.Name, ViewContext.RouteData.GetRequiredString("action"), new { id = cellar.ID })</li>
+        }
+    </ul>
+</div>
+

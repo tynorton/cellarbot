@@ -9,25 +9,13 @@
 
 <div>
     <h4>Cellar</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-    </dl>
+    <div>@Html.ActionLink("Add to cellar", "AddToCellar", "Cellar")</div>
+    <ul>
+        @foreach (var ce in Model.CellarEntries)
+        {
+            <li>@ce.Beer.Brewery.name - @ce.Beer.name (@ce.Count)</li>
+        }
+    </ul>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

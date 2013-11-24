@@ -62,7 +62,7 @@ namespace CellarBotHome.Controllers
                     ents.Beers.Add(beer);
                     ents.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { id = beer.id });
                 }
                 catch (Exception ex)
                 {

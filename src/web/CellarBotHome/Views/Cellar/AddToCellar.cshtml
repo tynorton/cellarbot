@@ -41,106 +41,17 @@
 
 @if (null != ViewBag.SearchTerm && null != ViewBag.OnePageOfBeers)
 {
-    <h2>Please select the beer you wish to add</h2>
-    <ul>
-        @foreach (sp_searchBeers_Result beer in ViewBag.OnePageOfBeers)
-        {
-            <li>@Html.ActionLink(beer.brewery_name + " - " + beer.beer_name, ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID, beerId = beer.beer_id })</li>
-        }
-    </ul>
-
-        <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-    @Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfBeers, searchPage => Url.Action(ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID, searchPage, beerSearchHint = ViewBag.SearchTerm }))
-
-    <div>
-        <h3>Don't see your beer?</h3>
-        <p>Feel free to @Html.ActionLink("add it", "Create", "Beer"). :)</p>
-    </div>
+    @Html.Partial("AddToCellar/_BeerList")
 }
 else if (null != ViewBag.BeerID)
 {
-    <h2>Add to cellar</h2>
-    using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true)
-            <div class="form-group">
-                @Html.Label("Name")
-                <div class="col-md-10">
-                    @ViewBag.Beer.name (@Html.ActionLink("change", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID }))
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.Label("Year")
-                <div class="col-md-10">
-                    @Html.Label(DateTime.Now.Year.ToString()) (<a href="#">change</a>)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.Label("How Many?")
-                <div class="col-md-10">
-                    @Html.Label("1") (<a href="#">change</a>)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.Label("Notes")
-                <div class="col-md-10">
-                    @Html.TextArea("notes")
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Add" class="btn btn-default" />
-                    |
-                    @Html.ActionLink("cancel", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID })
-                </div>
-            </div>
-        </div>
-    }
+    @Html.Partial("AddToCellar/_AddToCellar")
 }
 else if (null == Model)
 {
-    <h2>Pick a cellar to add to</h2>
-    <div>
-        <ul>
-            @foreach (var cellar in cellars)
-            {
-                <li>@Html.ActionLink(cellar.Name, ViewContext.RouteData.GetRequiredString("action"), new { id = cellar.ID })</li>
-            }
-        </ul>
-    </div>
+    @Html.Partial("AddToCellar/_PickCellar", cellars)
 }
 else
 {
-    <h2>Add a beer</h2>
-    using (Html.BeginForm("AddToCellar", "Cellar", null, FormMethod.Post, new { id = "mainForm" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true)
-            @Html.Hidden("beerId")
-            @using (Html.BeginForm("Search", "Beer"))
-            {
-                <div class="form-group">
-                    @Html.Label("Search for Beer", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input id="beerSearchHint" name="beerSearchHint" type="text" />
-                    </div>
-                </div>
-            }
-            
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Search" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
+    @Html.Partial("AddToCellar/_AddABeer")
 }

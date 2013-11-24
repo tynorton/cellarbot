@@ -7,28 +7,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (User.Identity.IsAuthenticated) {
-<div class="row">
-    <div class="col-md-8">
-        <h2>Your Cellars</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Your Cellars</h2>
+        </div>
     </div>
-</div>
 
-<div>
-    @Html.ActionLink("Create New", "Create")
-</div>
+    <div>
+        @Html.ActionLink("Create New", "Create")
+    </div>
 
-<ul>
-    @foreach (var cellar in Model)
-    {
-        <li>@Html.ActionLink((string)cellar.Name, "Details", new { id = cellar.ID })</li>
-    }
-</ul>
-<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-@Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))
+    <ul>
+        @foreach (var cellar in Model)
+        {
+            <li>@Html.ActionLink((string)cellar.Name, "Details", new { id = cellar.ID })</li>
+        }
+    </ul>
+    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+    @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))
 }
-else {
- <div>
-     You need to log in first
- </div>   
+else
+{
+    <div>
+        You need to log in first
+    </div>
 }

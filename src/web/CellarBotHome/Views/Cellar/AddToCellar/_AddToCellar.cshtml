@@ -1,0 +1,73 @@
+﻿@{
+    var existingCellar = Model as CellarBotHome.Models.Cellar;
+    var existingEntries = existingCellar.CellarEntries.Where(obj => obj.BeerID == ViewBag.BeerID);
+
+    // Change to current selection
+    var currentYear = DateTime.Now.Year;
+    var currentYearEntry = existingEntries.Where(obj => obj.Year == currentYear).FirstOrDefault();
+    string notes = string.Empty;
+    if (null != currentYearEntry)
+    {
+        notes = currentYearEntry.Notes;
+    }
+}
+
+<h2>Add to cellar</h2>
+@using (Html.BeginForm("CommitCellarAddition", "Cellar"))
+{
+    @Html.Hidden("cellarId", (int)ViewBag.CellarID)
+    @Html.Hidden("beerId", (int)ViewBag.BeerID)
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Name
+                </dt>
+
+                <dd>
+                    @ViewBag.Beer.name (@Html.ActionLink("change", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID }))
+                </dd>
+
+                <dt>
+                    Year
+                </dt>
+
+                <dd>
+                    @Html.Hidden("year", DateTime.Now.Year)
+                    @Html.Label(DateTime.Now.Year.ToString()) (<a href="#">change</a>)
+                </dd>
+
+                <dt>
+                    How Many
+                </dt>
+
+                <dd>
+                    @Html.Hidden("count", 1)
+                    @Html.Label("1") (<a href="#">change</a>)
+
+                    @if (null != currentYearEntry)
+                    {
+                        @:(@currentYearEntry.Count already cellared)
+                    }
+                </dd>
+
+                <dt>
+                    Notes (Optional)
+                </dt>
+
+                <dd>
+                    @Html.TextArea("notes", notes)
+                </dd>
+            </dl>
+        </div>
+
+        <div>
+            <input type="submit" value="Add" class="btn btn-default" />
+            |
+            @Html.ActionLink("cancel", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID })
+        </div>
+    </div>
+}

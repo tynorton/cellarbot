@@ -19,6 +19,7 @@ namespace CellarBotHome.Models
         public int CellarID { get; set; }
         public string Notes { get; set; }
         public Nullable<int> Count { get; set; }
+        public Nullable<int> Year { get; set; }
     
         public virtual Beer Beer { get; set; }
         public virtual Cellar Cellar { get; set; }

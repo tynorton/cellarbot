@@ -17,5 +17,13 @@ namespace CellarBotHome.Models
                 .OrderBy(obj => obj.Name)
                 .ToList();
         }
+
+        public static Cellar GetCellar(int cellarId)
+        {
+            var ents = new CellarBotHome.Models.CellarBotEntities();
+            return (from c in ents.Cellars
+                    where c.ID == cellarId
+                    select c).FirstOrDefault();
+        }
     }
 }
