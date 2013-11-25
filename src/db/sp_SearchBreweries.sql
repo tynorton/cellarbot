@@ -14,5 +14,5 @@ BEGIN
     SET NOCOUNT ON;
     SELECT id, name
     FROM Breweries
-    WHERE name LIKE '%' + @SearchValue +'%';
+    WHERE name LIKE '%' + @SearchValue + '%';
 END

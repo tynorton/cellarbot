@@ -33,24 +33,7 @@ namespace CellarBotHome.Controllers
             return View((from b in ents.Beers where b.id == id select b).FirstOrDefault());
         }
 
-        //
-        // GET: /Beer/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        public ActionResult CreateByUPC()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View();
-        }
-
-        public ActionResult CreateBeer(Beer beer)
+        public ActionResult Create(Beer beer, int? cellarId = null)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -61,6 +44,11 @@ namespace CellarBotHome.Controllers
                     CellarBotEntities ents = new CellarBotEntities();
                     ents.Beers.Add(beer);
                     ents.SaveChanges();
+
+                    if (cellarId.HasValue)
+                    {
+                        return RedirectToAction("AddToCellar", "Cellar", new { id = cellarId, beerId = beer.id });
+                    }
 
                     return RedirectToAction("Details", new { id = beer.id });
                 }
@@ -73,32 +61,6 @@ namespace CellarBotHome.Controllers
             {
                 return RedirectToAction("Index");
             }
-        }
-
-        //
-        // POST: /Beer/Create
-        [HttpPost]
-        public ActionResult CreateByUPC(Beer beer)
-        {
-            return CreateBeer(beer);
-        }
-
-        public ActionResult CreateBasic()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View();
-        }
-
-        //
-        // POST: /Beer/Create
-        [HttpPost]
-        public ActionResult CreateBasic(Beer beer)
-        {
-            return CreateBeer(beer);
         }
 
         //

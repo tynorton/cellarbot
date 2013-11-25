@@ -19,12 +19,39 @@
         @Html.ActionLink("Create New", "Create")
     </div>
 
-    <ul>
-        @foreach (var cellar in Model)
-        {
-            <li>@Html.ActionLink((string)cellar.Name, "Details", new { id = cellar.ID })</li>
-        }
-    </ul>
+    if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Cellar Name
+                    </td>
+                    <td>
+                        Total Beers
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cellar in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(cellar.Name, "Details", new { id = cellar.ID })</td>
+                        <td>@cellar.CellarEntries.Sum(obj => obj.Count)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <h3>Stats</h3>
+            <p>Total Beers: @Model.Sum(cellar => cellar.CellarEntries.Sum(obj => obj.Count))</p>
+        </div>
+    }
+    else
+    {
+        <p>No Cellars</p>
+    }
+
     <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
     @Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))
 }

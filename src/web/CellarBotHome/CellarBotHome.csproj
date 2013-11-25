@@ -68,6 +68,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity.Repository">
+      <HintPath>..\packages\System.Data.Entity.Repository.2.0.0.1\lib\net45\System.Data.Entity.Repository.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -81,6 +84,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -230,7 +236,7 @@
     <Compile Include="Models\CellarEntry.cs">
       <DependentUpon>CellarBotModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CellarHelper.cs" />
+    <Compile Include="Models\CellarExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SearchManager.cs" />
     <Compile Include="Models\sp_searchBeers_Result.cs">
@@ -380,13 +386,11 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Beer\Index.cshtml" />
-    <Content Include="Views\Beer\Create.cshtml" />
     <Content Include="Views\Brewery\Index.cshtml" />
     <Content Include="Views\Brewery\Create.cshtml" />
     <Content Include="Views\Beer\Details.cshtml" />
     <Content Include="Views\Brewery\Details.cshtml" />
-    <Content Include="Views\Beer\CreateBasic.cshtml" />
-    <Content Include="Views\Beer\CreateByUPC.cshtml" />
+    <Content Include="Views\Beer\Create.cshtml" />
     <Content Include="Views\Beer\SearchResults.cshtml" />
     <Content Include="Views\Brewery\Edit.cshtml" />
     <Content Include="Views\Brewery\SearchResults.cshtml" />

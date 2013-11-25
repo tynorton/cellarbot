@@ -53,7 +53,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BeerID" Type="int" Nullable="false" />
           <Property Name="CellarID" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />

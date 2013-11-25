@@ -6,7 +6,7 @@
 
     var userId = User.Identity.GetUserId();
     var ents = new CellarBotEntities();
-    var cellars = CellarHelper.GetUserCellars(userId);
+    var cellars = ents.GetUserCellars(userId);
 }
 
 <div class="jumbotron">
@@ -18,19 +18,25 @@
 @if (cellars.Any())
 {
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h2>Your Cellars</h2>
             <div>
                 <ul>
                     @foreach (var cellar in cellars)
                     {
-                        <li>@cellar.Name</li>
+                        <li>@Html.ActionLink(cellar.Name, "Details", "Cellar", new { id = cellar.ID }, null)</li>
                     }
                 </ul>
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <h2>Your Stats</h2>
+            <p>Total Beers: @cellars.Sum(cellar => cellar.CellarEntries.Sum(obj => obj.Count))</p>
+            <p>Total Breweries: @cellars.Sum(cellar => cellar.CellarEntries.Select(obj => obj.Beer.brewery_id).Distinct().Count())</p>
+        </div>
+
+        <div class="col-md-4">
             <h2>Our Database</h2>
             <div>
                 <ul>

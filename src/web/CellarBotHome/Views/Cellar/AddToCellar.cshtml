@@ -9,8 +9,9 @@
     ViewBag.Title = "Add Items To Your Cellar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    var ents = new CellarBotEntities();
     var userId = User.Identity.GetUserId();
-    var cellars = CellarHelper.GetUserCellars(userId);
+    var cellars = ents.GetUserCellars(userId);
 }
 
 <script>
@@ -43,15 +44,15 @@
 {
     @Html.Partial("AddToCellar/_BeerList")
 }
-else if (null != ViewBag.BeerID)
-{
-    @Html.Partial("AddToCellar/_AddToCellar")
-}
 else if (null == Model)
 {
     @Html.Partial("AddToCellar/_PickCellar", cellars)
 }
-else
+else if (null == ViewBag.BeerID)
 {
     @Html.Partial("AddToCellar/_AddABeer")
+}
+else
+{
+    @Html.Partial("AddToCellar/_AddToCellar")
 }

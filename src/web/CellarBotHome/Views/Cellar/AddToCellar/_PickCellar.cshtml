@@ -3,7 +3,7 @@
     <ul>
         @foreach (CellarBotHome.Models.Cellar cellar in Model)
         {
-            <li>@Html.ActionLink(cellar.Name, ViewContext.RouteData.GetRequiredString("action"), new { id = cellar.ID })</li>
+            <li>@Html.ActionLink(cellar.Name, ViewContext.RouteData.GetRequiredString("action"), new { id = cellar.ID, beerId = ViewBag.BeerID })</li>
         }
     </ul>
 </div>

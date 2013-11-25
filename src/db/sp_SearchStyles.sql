@@ -1,3 +1,5 @@
+USE [CellarBot]
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -14,5 +16,5 @@ BEGIN
     SET NOCOUNT ON;
     SELECT id, cat_id, style_name
     FROM Styles
-    WHERE style_name LIKE @SearchValue;
+    WHERE style_name LIKE '%' + @SearchValue + '%';
 END

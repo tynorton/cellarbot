@@ -101,6 +101,6 @@
 <ul>
     @foreach (var beer in ViewBag.Beers)
     {
-        <li>@Html.ActionLink((string)beer.name, "Details", "Beer", new { id = beer.id }, new { })</li>
+        <li>@Html.ActionLink((string)beer.Brewery.name + " - " + (string)beer.name, "Details", "Beer", new { id = beer.id }, new { })</li>
     }
 </ul>

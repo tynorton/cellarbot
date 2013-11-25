@@ -1,17 +1,13 @@
 USE [CellarBot]
-GO
 
-/****** Object:  StoredProcedure [dbo].[sp_searchBeers]    Script Date: 10/24/2013 11:26:54 PM ******/
-DROP PROCEDURE [dbo].[sp_searchBeers]
-GO
-
-/****** Object:  StoredProcedure [dbo].[sp_searchBeers]    Script Date: 10/24/2013 11:26:54 PM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF OBJECT_ID ( 'sp_searchBeers', 'P' ) IS NOT NULL 
+    DROP PROCEDURE sp_searchBeers;
+GO
 CREATE PROCEDURE [dbo].[sp_searchBeers]
     @SearchValue nvarchar(255)
 AS 

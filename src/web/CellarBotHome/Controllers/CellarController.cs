@@ -8,15 +8,18 @@ using PagedList;
 using PagedList.Mvc;
 using CellarBotHome.Models;
 using System.Data.Entity.Validation;
+using System.Data.Entity;
 
 namespace CellarBotHome.Controllers
 {
     public class CellarController : Controller
     {
-        CellarBotEntities ents = new CellarBotEntities();
+        
 
         public ActionResult AddToCellar(int? id = null, int? beerId = null, string beerSearchHint = null, int? searchPage = null)
         {
+            CellarBotEntities ents = new CellarBotEntities();
+
             ViewBag.CellarID = id;
             ViewBag.BeerID = beerId;
             ViewBag.SearchTerm = beerSearchHint;
@@ -61,11 +64,12 @@ namespace CellarBotHome.Controllers
         [HttpPost]
         public ActionResult CommitCellarAddition(int cellarId, int beerId, int year, int count, string notes = null)
         {
+            CellarBotEntities ents = new CellarBotEntities();
             var userId = User.Identity.GetUserId();
-            var cellar = CellarHelper.GetCellar(cellarId);
+            var cellar = ents.GetCellar(cellarId);
             if (cellar.UserID == userId)
             {
-                var entry = cellar.CellarEntries.FirstOrDefault(obj => obj.BeerID == beerId && obj.Year == year);
+                var entry = cellar.CellarEntries.Where(obj => obj.CellarID == cellarId && obj.BeerID == beerId && obj.Year == year).FirstOrDefault();
                 if (null != entry)
                 {
                     entry.Count += count;
@@ -92,8 +96,8 @@ namespace CellarBotHome.Controllers
             var ents = new CellarBotEntities();
 
             var userId = User.Identity.GetUserId();
-            var pageNumber = page ?? 1; 
-            var cellars = CellarHelper.GetUserCellars(userId).ToList();
+            var pageNumber = page ?? 1;
+            var cellars = ents.GetUserCellars(userId).ToList();
 
             if (User.Identity.IsAuthenticated && !cellars.Any())
             {

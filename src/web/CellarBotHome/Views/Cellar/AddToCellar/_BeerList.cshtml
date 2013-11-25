@@ -17,13 +17,13 @@
     @Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfBeers, searchPage => Url.Action(ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID, searchPage, beerSearchHint = ViewBag.SearchTerm }))
     <div>
         <h3>Don't see your beer?</h3>
-        <p>Feel free to @Html.ActionLink("add it", "CreateByUPC", "Beer"). :)</p>
+        <p>Feel free to @Html.ActionLink("add it", "Create", "Beer", new { cellarId = ViewBag.CellarID }, null). :)</p>
     </div>
 }
 else
 {
     <h2>No Beers Found matching '@ViewBag.SearchTerm'</h2>
     <div>
-        <p>Feel free to @Html.ActionLink("add one", "CreateByUPC", "Beer"). :)</p>
+        <p>Feel free to @Html.ActionLink("add one", "Create", "Beer", new { cellarId = ViewBag.CellarID }, null). :)</p>
     </div>
 }

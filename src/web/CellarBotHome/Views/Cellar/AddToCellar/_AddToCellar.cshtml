@@ -23,27 +23,31 @@
         @Html.ValidationSummary(true)
         <div>
             <dl class="dl-horizontal">
-                <dt>
-                    Name
-                </dt>
+                <dt>Name</dt>
+                <dd><b>@ViewBag.Beer.name</b> (@Html.ActionLink("change", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID }))</dd>
 
-                <dd>
-                    @ViewBag.Beer.name (@Html.ActionLink("change", ViewContext.RouteData.GetRequiredString("action"), new { id = ViewBag.CellarID }))
-                </dd>
+                <dt>Brewery</dt>
+                <dd>@ViewBag.Beer.Brewery.name</dd>
 
-                <dt>
-                    Year
-                </dt>
+                <dt>ABV</dt>
+                <dd>@(ViewBag.Beer.abv + "%")</dd>
 
+                <dt>Style</dt>
+                <dd>@(ViewBag.Beer.Style.style_name)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd></dd>
+
+                <dt>Cellar</dt>
+                <dd><b>@Model.Name</b> (@Html.ActionLink("change", ViewContext.RouteData.GetRequiredString("action"), new { id = (int?)null, beerId = ViewBag.BeerID }))</dd>
+
+                <dt>Year</dt>
                 <dd>
                     @Html.Hidden("year", DateTime.Now.Year)
                     @Html.Label(DateTime.Now.Year.ToString()) (<a href="#">change</a>)
                 </dd>
 
-                <dt>
-                    How Many
-                </dt>
-
+                <dt>How Many</dt>
                 <dd>
                     @Html.Hidden("count", 1)
                     @Html.Label("1") (<a href="#">change</a>)
@@ -54,13 +58,8 @@
                     }
                 </dd>
 
-                <dt>
-                    Notes (Optional)
-                </dt>
-
-                <dd>
-                    @Html.TextArea("notes", notes)
-                </dd>
+                <dt>Notes (Optional)</dt>
+                <dd>@Html.TextArea("notes", notes)</dd>
             </dl>
         </div>
 

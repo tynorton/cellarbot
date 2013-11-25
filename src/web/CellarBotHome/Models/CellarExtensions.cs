@@ -6,11 +6,10 @@ using System.Web.Mvc;
 
 namespace CellarBotHome.Models
 {
-    public static class CellarHelper
+    public static class CellarExtensions
     {
-        public static IEnumerable<Cellar> GetUserCellars(string userId)
+        public static IEnumerable<Cellar> GetUserCellars(this CellarBotEntities ents, string userId)
         {
-            var ents = new CellarBotHome.Models.CellarBotEntities();
             return (from c in ents.Cellars
                            where c.UserID == userId
                            select c)
@@ -18,9 +17,8 @@ namespace CellarBotHome.Models
                 .ToList();
         }
 
-        public static Cellar GetCellar(int cellarId)
+        public static Cellar GetCellar(this CellarBotEntities ents, int cellarId)
         {
-            var ents = new CellarBotHome.Models.CellarBotEntities();
             return (from c in ents.Cellars
                     where c.ID == cellarId
                     select c).FirstOrDefault();
